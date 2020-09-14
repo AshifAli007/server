@@ -1,0 +1,92 @@
+<div class="container-fluid container-fixed-lg sm-p-l-5" style="margin-top: 15px;">
+    <div class="panel panel-transparent" >
+
+        <!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- START PANEL -->
+            <div class="panel panel-default">
+              <div class="panel-heading separator">
+                  <div class="panel-title">
+                    User & Zone Mapping
+                  </div>
+
+
+              </div>
+
+            </br>
+                <div class="panel-body">
+
+                    <form role="form" name="myForm">
+
+
+                        <div class="form-group col-md-3">
+                            <label>Employee List</label>
+                            <select class="form-control"  ng-model="Employee"  >
+                                    <option value="">Select Employee</option>
+                                    <option ng-repeat="emp in empData" value="{{emp.id}}">
+                                        {{emp.fullName}}
+                                    </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Zone List</label>
+                            <select class="form-control"  ng-model="Zone"  >
+                                    <option value="">Select Zone</option>
+                                    <option ng-repeat="zone in zoneData" value="{{zone.id}}">
+                                        {{zone.zoneName}}
+                                    </option>
+                            </select>
+                        </div>
+
+
+               
+
+                        <div class="form-group col-md-3" >
+
+                          <button title="Save new cellsite" ng-hide = "IsVisible" style="top: 25px;" ng-click="mappinguserZone()" type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-save">
+                              <span>Associate</span>
+                          </button>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+                </br>
+            <div class="panel-body">
+                <div class="panel-heading">
+                <div class="panel-title">
+                    Mapping List
+                </div>
+
+                <div class="panel-body">
+ 
+                    <table id="mappiguserzone" class="display" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                          
+                            <th>Employee Id</th>
+                            <th>Employee Full Name</th>
+                            <th>Zone Name</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+            </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+
+
+  </div>
+</div>
+<!-- END CONTAINER FLUID -->

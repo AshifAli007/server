@@ -1,0 +1,48 @@
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Select Floor</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label for="Device Type">Select Floor</label>
+                                                    <select ng-model="floor" class="form-control" id="sel1"
+                                                        ng-change="showFloorPanel(floor)" name="sellist1">
+                                                        <option value="">Select Floor</option>
+                                                        <option ng-repeat="floor in floors" value="{{floor}}">
+                                                            {{floor.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card" ng-show="showpanel">
+                                    <div class="card-header">
+                                        <h5>Floor Layout</h5>
+                                    </div>
+                                    <div ng-style="floorImage" id="imgcan">
+                                        <canvas height="1000px" id="canvas"
+                                            style="background-color:transparent; width: 100%"></canvas>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+<!-- [ Main Content ] end -->

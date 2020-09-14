@@ -1,0 +1,22 @@
+HTTrack3.48-21 launched on Wed, 27 Feb 2019 17:36:11 at https://html.webinane.com/electric-admin/#/
+(httrack https://html.webinane.com/electric-admin/#/ )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+17:36:15	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link primary/robots.txt (from primary/primary)
+17:36:15	Warning: 	Retry after error -5 (Unable to get server's address: Name or service not known) at link primary/ (from primary/primary)
+17:36:23	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link primary/ (from primary/primary)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/fonts/glyphicons-halflings-regular.eot (from https://html.webinane.com/electric-admin/css/bootstrap.min.css)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/fonts/glyphicons-halflings-regular.eot? (from https://html.webinane.com/electric-admin/css/bootstrap.min.css)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/fonts/glyphicons-halflings-regular.woff2 (from https://html.webinane.com/electric-admin/css/bootstrap.min.css)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/fonts/glyphicons-halflings-regular.woff (from https://html.webinane.com/electric-admin/css/bootstrap.min.css)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/fonts/glyphicons-halflings-regular.ttf (from https://html.webinane.com/electric-admin/css/bootstrap.min.css)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/fonts/glyphicons-halflings-regular.svg (from https://html.webinane.com/electric-admin/css/bootstrap.min.css)
+17:36:23	Error: 	"Not Found" (404) at link https://html.webinane.com/electric-admin/img/sf-steps-activated.png (from https://html.webinane.com/electric-admin/css/main.css)
+17:36:23	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link primary/ (from primary/primary)
+
+HTTrack Website Copier/3.48-21 mirror complete in 12 seconds : 46 links scanned, 34 files written (7327180 bytes overall) [5250878 bytes received at 437573 bytes/sec], 2990743 bytes transferred using HTTP compression in 21 files, ratio 29%, 10.5 requests per connection
+(9 errors, 2 warnings, 0 messages)

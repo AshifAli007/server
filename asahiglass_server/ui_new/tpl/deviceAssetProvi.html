@@ -1,0 +1,156 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<toaster-container></toaster-container>
+<div ng-if="loading" class="loading"><img src="../images/Spinner.gif" class="mx-auto d-block"></div>
+
+<!-- Banner Part starts -->
+<div class="bg-statement pb-3" ng-cloak>
+    <div class="container">
+        <div class="pt-3 pb-3">
+            <div class="row ">
+                <div class="col-md-2">
+                    <img src="../images/device.svg" class="zoom d-block mx-auto" alt="" />
+                </div>
+                <div class="col-md-10">
+                    <h2 class="text-dark mt-2 font-bold">Map Device with Asset</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4" ng-init="loadData()" ng-cloak>
+    <div class="main-body">
+        <div class="page-wrapper">
+            <!-- [ Main Content ] start -->
+            <form name="provisioningConfig" novalidate>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header bg-dark">
+                                <h5 class="text-white">Provisioning</h5>
+                            </div>
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col-lg-3 form-group">
+                                        <label for="deviceType">Select Device Type
+                                            <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                ng-show="!deviceType">*</span></label>
+                                        <select ng-model="deviceType" class="form-control" id="sel1" name="sellist1">
+                                            <option value="">Select Device Type</option>
+                                            <option value="5">RFID Card</option>
+                                            <option value="1">Bluetooth Beacon</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 form-group">
+                                        <label for="gateway">Select Gateway
+                                            <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                ng-show="!gateway">*</span></label>
+                                        <select ng-model="gateway" class="form-control" id="sel1" name="sellist1">
+                                            <option value="">Select Gateway</option>
+                                            <option ng-repeat="proDevice in proDevices" value="{{proDevice.serial}}">
+                                                {{proDevice.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 form-group">
+                                        <label ng-show="deviceType == 1" for="pwd">Beacon Name</label>
+                                        <label ng-show="deviceType == 5" for="pwd">RRFID Name</label>
+                                        <label ng-hide="deviceType == 1 || deviceType == 5" for="pwd">Device
+                                            Name</label>
+                                        <input name="deviceName" ng-model="deviceName" type="text" class="form-control"
+                                            placeholder="Enter Device Name" ng-pattern="/^[a-zA-Z0-9_ -]*$/"
+                                            ng-trim="true">
+                                        <span ng-if="provisioningConfig.deviceName.$error.pattern "
+                                            class="form-text text-danger p-l-10">No special
+                                            character are allowed.</span>
+                                    </div>
+                                    <div class="col-lg-3 form-group">
+                                        <label ng-show="deviceType == 1" for="pwd">Beacon Serial No</label>
+                                        <label ng-show="deviceType == 5" for="pwd">RRFID Serial No</label>
+                                        <label ng-hide="deviceType == 1 || deviceType == 5" for="pwd">Device Serial
+                                            No</label>
+                                        <input disabled="disabled" ng-model="deviceSerial" type="text"
+                                            class="form-control" placeholder="Device Serial No">
+                                    </div>
+                                    <div class="col-lg-3 form-group">
+                                        <label for="pwd">Select Asset</label>
+                                        <select ng-model="assetId" class="form-control" id="sel1" name="sellist1">
+                                            <option value="">Select Asset</option>
+                                            <option ng-repeat="asset in assetDetails" value="{{asset.id}}">
+                                                {{asset.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2" ng-hide="showBtn == true">
+                                        <label for="pwd">&nbsp;</label>
+                                        <button ng-click="ScanDevice()"
+                                            ng-disabled="ScanDisable || !deviceType || !gateway"
+                                            class="btn btn-primary btn-block">Scan
+                                            <div ng-show="showMsgSpinner == true"
+                                                class="spinner-border spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span></div></button>
+                                    </div>
+                                    <div class="col-lg-2" ng-show="showBtn == true">
+                                        <label for="pwd">&nbsp;</label>
+                                        <button ng-click="saveDevice()" class="btn btn-primary btn-block">Save</button>
+                                    </div>
+                                    <div class="col-lg-1" ng-show="showBtn == true">
+                                        <label for="pwd">&nbsp;</label>
+                                        <label for="pwd">&nbsp;</label>
+                                        <button ng-click="resetAll()" type="button" title="Reset"
+                                            class="btn btn-block btn-icon btn-warning"><i
+                                                class="fa fa-sync"></i></button>
+                                    </div>
+                                    <div class="col-lg-6" ng-if="errMsg">
+                                        <br>
+                                        <br>
+                                        <span class="badge badge-danger">Time over please try again!</span>
+                                    </div>
+                                    <div class="col-lg-6" ng-if="showMsg">
+                                        <br>
+                                        <br>
+                                        <span class="badge badge-warning">{{msg}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header bg-dark">
+                                <h5 class="text-white">Device list</h5>
+                            </div>
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table id="proDevices" class="display table nowrap table-striped table-hover"
+                                        style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Asset Name</th>
+                                                <th>Device Type</th>
+                                                <th>Device Serial No.</th>
+                                                <th>Device Name</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>
+<!-- Banner Part End -->
+<script>
+    $(document).ready(function () {
+        $('.upload-form input').change(function () {
+            $('.upload-form p').text(this.files.length + " file(s) selected");
+        });
+    });
+</script>

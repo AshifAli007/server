@@ -1,0 +1,98 @@
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <!-- [ breadcrumb ] start -->
+                        
+                        <!-- [ breadcrumb ] end -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- [ Main Content ] start -->
+                                <div class="row">
+                                    <!-- [ configuration table ] start -->
+                                    
+                                    <!-- [ configuration table ] end -->
+    
+                                    <!-- [ HTML5 Export button ] start -->
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Search Report</h5>
+                                            </div>
+                                            <div class="card-block">
+                                                <div class="row">
+                                                        <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                        <label for="Device Type">Report Type</label>
+                                                                        <select  ng-model="repType" class="form-control" id="sel1" name="sellist1">
+                                                                                <option value="">Select Report Type</option>
+                                                                                <option value="1">Today</option>
+                                                                                <option value="2">Date Range</option>
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                        <div ng-show="repType==2"  class="form-group col-md-3">
+                                                                <label>Date Range</label> 
+                                                        <div  class="input-daterange input-group" id="datepicker-range" ui-jq="datepicker">
+                                                                
+                                                            <input type="text" class="input-sm form-control" name="start" ng-model="startDate" placeholder="Start Date..." />
+                                                             
+                                                                
+                                                            <input type="text" class="input-sm form-control" name="end" ng-model="endDate" placeholder="End Date..."/>
+                                                        </div>
+                                                        </div>
+                                                        <!-- <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                        <label for="Device Type">Select Zone</label>
+                                                                        <select  ng-model="Zone" class="form-control" id="sel1" name="sellist1">
+                                                                                <option value="">Select Zone</option>
+                                                                                <option ng-repeat="zone in zoneData" value="{{zone.id}}">
+                                                                                        {{zone.zoneName}}
+                                                                                </option>
+                                                                                
+                                                                        </select>
+                                                                </div>
+                                                        </div> -->
+                                                    <div class="col-lg-2">
+                                                            <div class="form-group">
+                                                                    <label for="Device Type">Select Asset</label>
+                                                                    <select  ng-model="Employee"  class="form-control" id="sel1" name="sellist1">
+                                                                            <option value="">Select Asset</option>
+                                                                            <option ng-repeat="asset in empData" value="{{asset.uniqueId}}">
+                                                                                    {{asset.name}}
+                                                                            </option>
+                                                                            
+                                                                    </select>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                            <label for="pwd">&nbsp;</label>
+                                                        <button ng-click="showRep()"  class="btn btn-primary btn-block">Search</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <hr>
+
+
+                                        <div class="card" ng-hide="showPanel">
+                                                <div class="card-header">
+                                                    <h5>Report Data</h5>
+                                                </div>
+                                                <div class="card-block ">
+                                                        <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+                                                </div>
+                                        </div>
+                                    
+                                    
+                                    
+                                    </div>
+    
+                                    
+                </div>
+            </div>
+        </section>
+        <!-- [ Main Content ] end -->
+    

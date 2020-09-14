@@ -1,0 +1,78 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<!-- Banner Part starts -->
+<div class="bg-statement pb-3">
+    <div class="container">
+        <div class="pt-3 pb-3">
+        <div class="row">
+          <div class="col-md-2">
+            <img src="../images/battery.svg" class="zoom d-block mx-auto" alt="" />
+          </div>
+          <div class="col-md-10">
+            <h2 class="text-dark mt-2 font-bold">Beacon Battery Status</h2>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Banner Part starts -->
+<div class="container mt-5">
+  <div class="card User-Activity">
+    <div class="card-header bg-dark">
+      <h5 class="text-white">Beacon Battery Status</h5>
+      <div class="card-header-right">
+        <div class="btn-group card-option">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="feather icon-more-horizontal"></i>
+          </button>
+          <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i>
+                  maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a>
+            </li>
+            <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i>
+                  collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+            <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row mt-4 justify-content-center">
+      <div class="col-sm-6">
+        <input type="text" id="icon-search" class="form-control" placeholder="search . . ">
+      </div>
+    </div> -->
+
+
+    <div class="card">
+      <!-- <div class="card-header">
+            <h5>Zero Configuration</h5>
+          </div> -->
+      <div class="card-block">
+        <div class="table-responsive">
+          <table id="beaconMgtTable" class="display table nowrap table-striped table-hover" style="width:100%">
+            <thead>
+              <tr>
+                <th>Asset Name</th>
+                <th>Beacon Id</th>                
+                <th>Asset Id</th>               
+                <th>Battery Status</th>
+                <th>Percentage</th>
+                <th>Last Update</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- datatable Js -->
+
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>
+<!-- Banner Part End -->

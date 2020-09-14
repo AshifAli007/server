@@ -1,0 +1,178 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<toaster-container></toaster-container>
+<!-- Banner Part starts -->
+<div class="bg-statement pb-3" ng-cloak>
+  <div class="container">
+    <div class="pt-3 pb-3">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="../images/floor.svg" class="zoom d-block mx-auto" alt="" />
+        </div>
+        <div class="col-md-10">
+          <h2 class="text-dark mt-2 font-bold">Floor Management</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" ng-cloak>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <h5 class="text-center text-white">Configuration Form</h5>
+        </div>
+        <div class="card-block">
+          <form name="floorConfig" novalidate>
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label for="floorName">Floor Name
+                  <span class="ng-invalid" style="color:red; font-weight:bold;" ng-show="!name">*</span></label>
+                <input type="text" class="form-control" name="name" ng-model="name" placeholder="Enter Floor Name"
+                  ng-pattern="/^[a-zA-Z0-9_ -]*$/" required>
+                <span ng-if="floorConfig.name.$error.pattern " class="form-text text-danger p-l-10">No special
+                  character are allowed.</span>
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="floorno">Floor No
+                  <span class="ng-invalid" style="color:red; font-weight:bold;" ng-show="!floorno">*</span></label>
+                <input type="text" ng-keydown="filterValue($event)" class="form-control" ng-model="floorno"
+                  placeholder="Enter Floor No" ng-pattern="/^[0-9]*$/" required>
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="plant">Location
+                  <span class="ng-invalid" style="color:red; font-weight:bold;" ng-show="!plant">*</span></label>
+                <select ng-model="plant" class="form-control">
+                  <option value="">Select Location</option>
+                  <option ng-repeat="plant in plants" value="{{plant.id}}">
+                    {{plant.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="myFile">Select Floor Map
+                  <span class="ng-invalid" style="color:red; font-weight:bold;"
+                    ng-show="!myFile && !isedit">*</span></label>
+                <input type="file" class="form-control" style="padding: 7px 20px;" file-model="myFile"
+                  accept="image/*" />
+              </div>
+            </div>
+            <button class="btn btn-primary col-md-2 mx-auto d-block btn-md mb-3" ng-if="!isedit"
+              ng-disabled="!name ||!floorno ||!myFile || !plant" ng-click="addFloor()">Save</button>
+            <button class="btn btn-primary col-md-2 mx-auto d-block btn-md mb-3" data-toggle="modal"
+              data-target="#exampleModal" ng-if="isedit" ng-disabled="!name ||!floorno || !plant">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+</div>
+<div class="container" ng-show="showPanel === true" ng-cloak>
+  <div class="card">
+    <div class="card-header">
+      <h5>Floor Map</h5>
+      <div class="card-header-right">
+        <div class="">
+          <button ng-click="addPolygon()" type="button" class="btn btn-icon btn-rounded btn-primary"><i
+              class="fa fa-thumbs-up"></i></button>
+          <button ng-click="done()" type="button" class="btn btn-icon btn-rounded btn-secondary"><i
+              class="fa fa-camera"></i></button>
+        </div>
+      </div>
+    </div>
+    <div ng-style="floorImage" id="imgcan">
+      <canvas id="canvas" height="768px" style="background-color:transparent;"></canvas>
+    </div>
+  </div>
+</div>
+
+<!--code for modal window starts-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>Update Floor
+            Management</b>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure to update this data ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" ng-click="updateFloor()" class="btn btn-primary" data-dismiss="modal">Yes,
+          Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--code for modal window ends-->
+<!--code for modal window starts-->
+<div class="modal fade" id="floorlight" tabindex="-1" role="dialog" aria-labelledby="zonelightLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="zonelightLabel"><b>{{name_zone}}</b>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img ng-src="{{img}}" style="width: 100%;">
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--code for modal window ends-->
+
+<div class="container mt-3" ng-cloak>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card" ng-show="showTable == false">
+        <div class="card-header bg-dark">
+          <h5 class="text-white">Floor List</h5>
+        </div>
+        <div class="card-block coustomBlock table-responsive">
+          <table id="floor" class="display table nowrap table-striped table-hover" style="width: 100%;">
+            <thead>
+              <tr>
+                <th>Floor Name</th>
+                <th>Floor No.</th>
+                <th>Floor Image</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+      <div class="card" ng-show="showTable == true">
+        <div class="card-header bg-dark">
+          <h5 class="text-white">Floor List</h5>
+        </div>
+        <div class="card-block coustomBlock">
+          <div class="c-wrap mx-2">
+            <i class="feather icon-file-text mx-auto d-block text-center text-dark" style="font-size: 36px;"
+              aria-hidden="true"> </i>
+            <p class="text-center text-dark" style="margin: 10px 0px;">No records Found!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>
+<!-- Banner Part End -->

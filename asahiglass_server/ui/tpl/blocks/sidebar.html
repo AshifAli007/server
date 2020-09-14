@@ -1,0 +1,244 @@
+<style type="text/css">
+  ul,
+  #myUL {
+    list-style-type: none;
+  }
+
+
+
+  .caret {
+    cursor: pointer;
+    -webkit-user-select: none;
+    /* Safari 3.1+ */
+    -moz-user-select: none;
+    /* Firefox 2+ */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+  }
+
+  .nested {
+    display: none;
+  }
+
+  .caret-down {
+    background: #05a19c;
+    color: #fff;
+  }
+
+  .active {
+    display: block;
+    background: green;
+  }
+
+  .customcollapse {
+    display: none;
+  }
+
+  .custom-collapse {
+    display: none;
+  }
+
+  .custom_collapse {
+    display: none;
+  }
+
+  .customcollapseone {
+    display: none;
+  }
+
+  .reporting_sub_btns {
+    display: none;
+  }
+</style>
+
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar" style="overflow: auto;" ng-controller="menuController">
+  <div class="navbar-wrapper">
+    <div class="navbar-brand header-logo">
+      <a ui-sref="app.gurddashboard" class="b-brand">
+        <div class="">
+          <img class="img-cstm" style="" src="{{logo}}" alt="logo">
+          <!-- <i class="feather icon-trending-up"></i> -->
+        </div>
+        <span class="b-title">{{companyName}}</span>
+      </a>
+    </div>
+    <div class="navbar-content scroll-div">
+
+      <ul ng-hide="isPrivlage === 'true'" class="nav pcoded-inner-navbar">
+        <li class="nav-item pcoded-menu-caption">
+          <label>Navigation</label>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 2" class="nav-item ">
+          <a ui-sref="app.floorlayout" class="nav-link"><span class="pcoded-micon"><i
+                class="feather icon-home"></i></span><span class="pcoded-mtext">Floor Layout</span></a>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 2 || Usertype == 5" class="nav-item ">
+          <a ui-sref="app.gurddashboard" class="nav-link"><span class="pcoded-micon"><i
+                class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboards</span></a>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 2" class="nav-item ">
+          <a ui-sref="app.realtimeevents" class="nav-link"><span class="pcoded-micon"><i
+                class="feather icon-file-text"></i></span><span class="pcoded-mtext">Notifications</span></a>
+        </li>
+        <li ng-if="Usertype == 1" class="nav-item ">
+          <a ui-sref="app.assetzonemapping" class="nav-link"><span class="pcoded-micon"><i
+                class="fa fa-link"></i></span><span class="pcoded-mtext"> Asset & Zone</span></a>
+        </li>
+        <li ng-if="Usertype == 1" class="mebutton" style="cursor:pointer;">
+          <a data-toggle="collapse" data-target="#demo" ng-click="changeClassConfig()" class="nav-link"><span
+              class="pcoded-micon"><i class="feather icon-layout"></i></span><span
+              class="pcoded-mtext">Configuration</span></a>
+          <div class="customcollapse">
+            <ul class="pcoded-submenu">
+                <li ng-if="Usertype == 1" class="nav-item">
+                    <a ui-sref="app.floorconfig" class="nav-link"><span class="pcoded-micon"><i
+                          class="fa fa-map"></i></span><span class="pcoded-mtext"> Floor Configuration</span></a>
+                </li>
+
+                <li ng-if="Usertype == 1" class="nav-item">
+                      <a ui-sref="app.zoneconfig" class="nav-link"><span class="pcoded-micon"><i
+                            class="fa fa-map"></i></span><span class="pcoded-mtext"> Zone Configuration</span></a>
+                </li>
+                
+                <li ng-if="Usertype == 1" class="nav-item">
+                    <a ui-sref="app.netconfig" class="nav-link"><span class="pcoded-micon"><i
+                          class="fa fa-map"></i></span><span class="pcoded-mtext"> Network Configuration</span></a>
+                </li>
+
+              <li ng-if="Usertype == 1" class="nav-item ">
+                <a ui-sref="app.deviceconfig" class="nav-link"><span class="pcoded-micon"><i
+                      class="fab fa-bluetooth"></i></span><span class="pcoded-mtext"> Device Configuration</span></a>
+              </li>
+
+              <li ng-hide="CompanyId == 5" ng-if="Usertype == 1" class="nav-item">
+                <a ui-sref="app.busconfig" class="nav-link"><span class="pcoded-micon"><i
+                      class="fa fa-bus"></i></span><span class="pcoded-mtext"> Bus Configuration</span></a>
+              </li>
+              <li ng-hide="CompanyId == 5" ng-if="Usertype == 1" class="nav-item">
+                <a ui-sref="app.foodcartconfig" class="nav-link"><span class="pcoded-micon"><i
+                      class="fa fa-hotel"></i></span><span class="pcoded-mtext"> FoodCart Configuration</span></a>
+              </li>
+
+
+            </ul>
+          </div>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 4" class="mebuttonone" style="cursor:pointer;">
+          <a data-toggle="collapse" data-target="#demo1" ng-click="changeClassConfig()" class="nav-link"><span
+              class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Asset</span></a>
+          <div class="customcollapseone">
+            <ul class="pcoded-submenu">
+
+              <li ng-if="Usertype == 1" class="nav-item ">
+                <a ui-sref="app.assettypeconfig" class="nav-link"><span class="pcoded-micon"><i
+                      class="pg pg-bag ng-star-inserted"></i></span><span class="pcoded-mtext"> Asset Type
+                    Configuration</span></a>
+              </li>
+              <li ng-if="Usertype == 1" class="nav-item ">
+                <a ui-sref="app.subtypeconfig" class="nav-link"><span class="pcoded-micon"><i
+                      class="pg pg-bag ng-star-inserted"></i></span><span class="pcoded-mtext">Subtype
+                    Configuration</span></a>
+              </li>
+
+              <li ng-if="Usertype == 1 || Usertype == 4" class="nav-item">
+                <a ui-sref="app.employeeconfig" class="nav-link"><span class="pcoded-micon"><i
+                      class="pg pg-bag ng-star-inserted"></i></span><span class="pcoded-mtext"> Asset
+                    Configuration</span></a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 4" class="nav-item ">
+          <a ui-sref="app.deviceAndAssetProvi" class="nav-link"><span class="pcoded-micon"><i
+                class="fa fa-sitemap"></i></span><span class="pcoded-mtext">Device & Asset Provisioning</span></a>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 4" class="nav-item ">
+          <a ui-sref="app.healthManagement" class="nav-link"><span class="pcoded-micon"><i
+                class="fa fa-sitemap"></i></span><span class="pcoded-mtext">Health Management</span></a>
+        </li>
+        <li ng-if="Usertype  == 1 || Usertype == 4" class="nav-item ">
+          <a ui-sref="app.beaconbatteryStatus" class="nav-link"><span class="pcoded-micon"><i
+                class="fa fa-sitemap"></i></span><span class="pcoded-mtext">Beacon Battery Status</span></a>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 4" class="nav-item ">
+          <a ui-sref="app.rulesetup" class="nav-link"><span class="pcoded-micon"><i
+                class="fa fa-sitemap"></i></span><span class="pcoded-mtext">Rule Setup</span></a>
+        </li>
+        <li ng-if="Usertype == 1 || Usertype == 3 || Usertype == 2" class="reporting_btn" style="cursor:pointer;">
+          <a data-toggle="collapse" data-target="#demo2" ng-click="changeClassConfig()" class="nav-link"><span
+              class="pcoded-micon"><i class="feather icon-layout"></i></span><span
+              class="pcoded-mtext">Reporting</span></a>
+          <div class="reporting_sub_btns">
+            <ul class="pcoded-submenu">
+
+              <li  class="nav-item ">
+                <a ui-sref="app.reporting" class="nav-link"><span class="pcoded-micon"><i
+                      class="fab fa-bluetooth"></i></span><span class="pcoded-mtext"> Zone Reporting</span></a>
+              </li>
+
+              <li ng-hide="CompanyId == 5"  class="nav-item ">
+                <a ui-sref="app.reporting" class="nav-link"><span class="pcoded-micon"><i
+                      class="fa fa-map"></i></span><span class="pcoded-mtext"> Bus Reporting</span></a>
+              </li>
+              <li ng-hide="CompanyId == 5" class="nav-item ">
+                <a ui-sref="app.reporting" class="nav-link"><span class="pcoded-micon"><i
+                      class="pg pg-bag ng-star-inserted"></i></span><span class="pcoded-mtext"> FoodCart Reporting</span></a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
+
+</nav>
+<!-- [ navigation menu ] end -->
+        <script>
+          $(document).ready(function () {
+            $(".mebutton").click(function () {
+              $(".customcollapse").toggle();
+            $(".reporting_sub_btns").css("display", "none");
+            $(".customcollapseone").css("display", "none");
+
+            });
+          });
+        </script>
+        <script>
+          $(document).ready(function () {
+            $(".me-button").click(function () {
+              $(".custom-collapse").toggle();
+            });
+          });
+        </script>
+        <script>
+          $(document).ready(function () {
+            $(".me_button").click(function () {
+              $(".custom_collapse").toggle();
+            });
+          });
+          $(document).ready(function () {
+            $(".mebuttonone").click(function () {
+              $(".customcollapseone").toggle();
+              $(".customcollapse").css("display", "none");
+              $(".reporting_sub_btns").css("display", "none");
+            });
+          });
+
+          $(document).ready(function () {
+            $(".reporting_btn").click(function () {
+              $(".reporting_sub_btns").toggle();
+              $(".customcollapse").css("display", "none");
+              $(".customcollapseone").css("display", "none");
+            });
+          });
+        </script>
+        <script>
+          var toggler = document.getElementsByClassName("caret");
+          var i;
+          for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+              this.parentElement.querySelector(".nested").classList.toggle("active");
+              this.classList.toggle("caret-down");
+            });
+          }
+        </script>

@@ -1,0 +1,297 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<toaster-container></toaster-container>
+<div ng-if="loading" class="loading"><img src="../images/Spinner.gif" class="mx-auto d-block"></div>
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container ml-0" ng-init="loadData()" ng-cloak>
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ card range ] start -->
+                            <div class="col-md-12 col-xl-12">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label for="plantType"><b>Select Facility </b></label>
+                                            <select ng-model="plant"
+                                                class="bg-white form-control ng-pristine ng-untouched ng-valid"
+                                                id="sel1" name="sellist1" ng-change="setPlantData(plant)">
+                                                <option ng-repeat="plant in plantList" value="{{plant.id}}">
+                                                    {{plant.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card Active-visitor">
+                                    <div class="card-header">
+                                        <h5 class="d-block">Most Violated Zone <a class="text-primary"><span
+                                                    class="float-right cursor-pointer"
+                                                    ng-click="viewAllViolatedZoneData()">View
+                                                    All</span></a></h5>
+                                    </div>
+                                    <div class="card-block text-center">
+                                        <h6 class="mb-2"></h6>
+                                        <h5 class="mb-4">{{mostViolatedZone.name}}</h5>
+                                        <i class="fas fa-user-friends f-30 text-c-green"></i>
+                                        <h2 class="f-w-300 mt-3">{{mostViolatedZone.violationCount}}</h2>
+                                        <span class="text-muted">No of violations / 24 hrs</span>
+                                        <div class="progress mt-4 m-b-40">
+                                            <div class="progress-bar progress-c-theme" role="progressbar"
+                                                style="width: {{mostViolatedZone.violationCount}}%; height:7px;"
+                                                aria-valuenow="{{mostViolatedZone.violationCount}}" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="row text-left">
+                                            <div class="col-sm-12 pt-3 pb-3 border-top">
+                                                <span class="mr-3"><i
+                                                        class="feather icon-circle text-c-green  mr-2"></i>Allowed</span>
+                                                <span class="float-right">{{mostViolatedZone.allowedUsers}}</span>
+                                            </div>
+                                            <div class="col-sm-12 pt-3 pb-3 border-top">
+                                                <span class="mr-3"><i
+                                                        class="feather icon-circle text-c-blue  mr-2"></i>Not
+                                                    allowed</span>
+                                                <span class="float-right">{{mostViolatedZone.notAllowedUsers}}</span>
+                                            </div>
+                                            <div class="col-sm-12 pt-3 border-top">
+                                                <span class="mr-3"><i
+                                                        class="feather icon-circle text-c-purple  mr-2"></i>Active</span>
+                                                <span class="float-right">{{mostViolatedZone.activeUsers}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-xl-8">
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Most Violated Zone</h5>
+                                        <div style="float: right">
+                                            <!-- <span for="graphType">Select Graph Type </span> -->
+                                            <select ng-model="mostViolatedGraphType" class="bg-white form-control"
+                                                id="graph1" name="mostViolatedGraph"
+                                                ng-change="setMostViolatedGraph(mostViolatedGraphType)">
+                                                <option value="1">Bar Chart</option>
+                                                <option value="0">Pie Chart</option>
+                                                <option value="2">Gauge Chart</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="chart5" ng-hide="showMostViolatedErrorChartImage == true"></div>
+                                        <div class="noChartsDiv" ng-show="showMostViolatedErrorChartImage == true">
+                                            <img src="../images/no-result.png">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card Active-visitor">
+                                    <div class="card-header">
+                                        <h5 class="d-block">Most Populated Zone <a class="text-primary"><span
+                                                    class="float-right cursor-pointer"
+                                                    ng-click="viewAllPopulatedZoneData()">View All</span></a></h5>
+                                    </div>
+                                    <div class="card-block text-center">
+                                        <h6 class="mb-2"></h6>
+                                        <h5 class="mb-4">{{mostPopulatedData.name}}</h5>
+                                        <i class="fas fa-user-friends f-30 text-c-green"></i>
+                                        <h2 class="f-w-300 mt-3">{{mostPopulatedData.populationCount}}</h2>
+                                        <span class="text-muted">Assets Present</span>
+                                        <div class="progress mt-4 m-b-40">
+                                            <div class="progress-bar progress-c-theme" role="progressbar"
+                                                style="width:{{mostPopulatedData.populationCount}}%; height: 7px;"
+                                                aria-valuenow="{{mostPopulatedData.populationCount}}" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="row text-left">
+                                            <div class="col-sm-12 pt-3 pb-3 border-top">
+                                                <span class="mr-3"><i
+                                                        class="feather icon-circle text-c-green  mr-2"></i>Allowed</span>
+                                                <span class="float-right">{{mostPopulatedData.allowedUsers}} </span>
+                                            </div>
+                                            <div class="col-sm-12 pt-3 pb-3 border-top">
+                                                <span class="mr-3"><i
+                                                        class="feather icon-circle text-c-blue  mr-2"></i>Not
+                                                    allowed</span>
+                                                <span class="float-right">{{mostPopulatedData.notAllowedUsers}} </span>
+                                            </div>
+                                            <div class="col-sm-12 pt-3 border-top">
+                                                <span class="mr-3"><i
+                                                        class="feather icon-circle text-c-purple  mr-2"></i>Active</span>
+                                                <span class="float-right">{{mostPopulatedData.activeUsers}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-xl-8">
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Most Populated Zone</h5>
+                                        <div class="float-right"> <select ng-model="mostPopulatedGraphType"
+                                                class="bg-white form-control" id="graph1" name="mostPopulatedGraphType"
+                                                ng-change="setMostPopulatedGraphType(mostPopulatedGraphType)">
+                                                <option value="1">Bar Chart</option>
+                                                <option value="0">Pie Chart</option>
+                                                <option value="2">Pictorial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="populated-chart" ng-hide="showMostPopulatedChartErrorImage == true">
+                                        </div>
+                                        <div class="noChartsDiv" ng-show="showMostPopulatedChartErrorImage == true">
+                                            <img src="../images/no-result.png">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Zone Productivity</h5>
+                                        <div class="float-right">
+                                          <select ng-model="zoneProductivityGraphType"
+                                              class="bg-white form-control" id="graph1"
+                                              name="ZoneProductivityGraph"
+                                              ng-change="setZoneProductivityGraph(zoneProductivityGraphType)">
+                                              <option value="1">Bar Chart</option>
+                                              <option value="0">Pie Chart</option>
+                                              <option value="2">Histogram</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="chartdiv" ng-hide="showZoneProductivityErrorImage == true"></div>
+                                        <div class="noChartsDiv" ng-show="showZoneProductivityErrorImage == true">
+                                            <img src="../images/no-result.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Frequent Defaulter</h5>
+                                        <div class="float-right">
+                                          <select ng-model="mostFrequentZoneType"
+                                              class="bg-white form-control" id="graph3"
+                                              name="mostFrequentGraph"
+                                              ng-change="setMostFrequentZoneGraph(mostFrequentZoneType)">
+                                              <option value="1">Bar Chart</option>
+                                              <option value="0">Pie Chart</option>
+                                              <option value="2">XY Chart</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="chart6" ng-hide="showMostFrequentChartErrorImage == true"></div>
+                                        <div class="noChartsDiv" ng-show="showMostFrequentChartErrorImage == true">
+                                            <img src="../images/no-result.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-xl-12 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Overall Zone Performance</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="chartdiv3"></div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- [ Total-Charge section ] end -->
+
+                            <!--[ user-sale ] end -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card User-Activity" style="height: 100%; max-height: 464px;">
+                                    <div class="card-header">
+                                        <h5>Real Time Entry & Exit</h5>
+                                        <div class="card-header-right">
+                                            <div class="btn-group card-option">
+                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <i class="feather icon-more-horizontal"></i>
+                                                </button>
+                                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                                    <li class="dropdown-item full-card"><a href="#!"><span><i
+                                                                    class="feather icon-maximize"></i>
+                                                                maximize</span><span style="display:none;"><i
+                                                                    class="feather icon-minimize"></i>
+                                                                Restore</span></a></li>
+                                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i
+                                                                    class="feather icon-minus"></i> collapse</span><span
+                                                                style="display:none;"><i class="feather icon-plus"></i>
+                                                                expand</span></a></li>
+                                                    <li class="dropdown-item reload-card"><a href="#!"><i
+                                                                class="feather icon-refresh-cw"></i> reload</a></li>
+                                                    <li class="dropdown-item close-card"><a href="#!"><i
+                                                                class="feather icon-trash"></i> remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <!-- <div class="card-header">
+                                                  <h5>Zero Configuration</h5>
+                                                </div> -->
+                                        <div class="card-block">
+                                            <div class="table-responsive">
+                                                <table id="realtimeTable"
+                                                    class="display table nowrap table-striped table-hover"
+                                                    style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Zone Name</th>
+                                                            <th>Asset Name</th>
+                                                            <th>Asset Class</th>
+                                                            <th>Time</th>
+                                                            <th>Entry Time</th>
+                                                            <th>Exit Time</th>
+                                                            <th>Event Message</th>
+                                                            <!-- <th>Action</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>

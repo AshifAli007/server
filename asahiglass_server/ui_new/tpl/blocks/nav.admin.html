@@ -1,0 +1,44 @@
+  <!-- Nav bar starts-->
+  <nav data-ng-controller="notificationSideBarCtrl" data-ng-init="init()" class="navbar navbar-expand-md bg-header navbar-dark" ng-if="Username">
+    <!-- absolute header circles -->
+    <img src="../images/circle.png" style="top: -15px; left: -22px;" alt="logo" class="position-absolute"></a>
+    <img src="../images/circle.png" style="top: -32px; right: 0px;" alt="logo" class="position-absolute"></a>
+    <img src="../images/circle.png" style="top: -32px; left: 50%;" alt="logo" class="position-absolute"></a>
+    <!-- absolute header circles -->
+
+    <a class="navbar-brand bg-transparent" href="#"><img src="../images/logo.png" alt="logo" style="height: 60px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto f-16">
+        <li class="nav-item">
+          <a class="nav-link" href="/#/app/companyconfig"> <i class="fa fa-home" aria-hidden="true"> </i>
+            Company Config</a>
+        </li>
+        <li class="nav-item dropdown cursor-pointer">
+          <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+            OTA
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" ui-sref="app.ota">OTA Upload</a>
+            <a class="dropdown-item" ui-sref="app.otaDownload">OTA Download</a>
+          </div>
+        </li>
+
+        <!-- <li class="nav-item">
+          <div class="nav-bell">
+            <div class="notification">3</div>
+            <i class="fa fa-bell"> </i>
+          </div>
+        </li> -->
+        <li class="nav-item" ng-click="logout()">
+          <div class="nav-bell">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <!--Nav bar ends-->

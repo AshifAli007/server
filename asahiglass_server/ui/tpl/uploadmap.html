@@ -1,0 +1,102 @@
+<div class="container-fluid container-fixed-lg sm-p-l-5" style="margin-top: 15px;">
+    <div class="panel panel-transparent" >
+
+        <!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- START PANEL -->
+            <div class="panel panel-default">
+              <div class="panel-heading separator">
+                  <div class="panel-title">
+                      Map Configuration
+                  </div>
+
+
+              </div>
+
+            </br>
+                <div class="panel-body">
+
+                    <form role="form" name="myForm">
+
+                        <div class="form-group col-md-2">
+                            <label>Select Map </label>
+                            <input type="file" ng-click="clear()"   file-model="myFile" name="userFile" required=""  class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" >
+                        </div>
+                        <div class="col-md-2">
+                            <label>Area Type </label>
+                            <select class="form-control"  ng-model="type"  >
+                                <option value="">Select Area Type</option>
+                                <option value="1">Industry</option>
+                                <option value="2">Medical</option>
+                                <option value="3">Education</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Area Name </label>
+                            <input ng-model="areaName"  type="text" class="form-control" placeholder="" required>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label>Area Object </label>
+                            <input ng-model="object"  type="text" class="form-control" placeholder="" required>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label>Object Entity </label>
+                            <input ng-model="entity"  type="text" class="form-control" placeholder="" required>
+                        </div>
+
+                        <div class="form-group col-md-2" >
+
+                          <button title="Upload area map" style="top: 25px;" ng-click="uploadMap()" type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-save">
+                              <span>Upload</span>
+                          </button>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+                </br>
+            <div class="panel-body">
+                <div class="panel-heading">
+                <div class="panel-title">
+                    Zone List
+                </div>
+
+                <div class="panel-body">
+ 
+                    <table id="zone" class="display" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Zone Id</th>
+                            <th>Zone Name</th>
+                            <th>Max User In Zone</th>
+
+                            <th>Action</th>
+       
+    
+    
+    
+                        </tr>
+                        </thead>
+    
+                    </table>
+                </div>
+
+
+            </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+
+
+  </div>
+</div>
+<!-- END CONTAINER FLUID -->

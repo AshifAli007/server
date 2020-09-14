@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<toaster-container></toaster-container>
+<div class="bg-statement pb-3" ng-cloak>
+    <div class="container">
+        <div class="pt-3 pb-3">
+            <div class="row ">
+                <div class="col-md-2">
+                    <img src="../images/asset-zone.svg" class="zoom d-block mx-auto" alt="" />
+                </div>
+                <div class="col-md-10">
+                    <h2 class="text-dark mt-2 font-bold">Asset & Zone Mapping</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5" ng-init="loadData()" ng-cloak>
+    <div class="main-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <h5 class="text-white">Map Asset & Zone</h5>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="deviceType"><b>Select Asset </b>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!asset">*</span></label>
+                                    <select ng-model="asset" class="form-control" id="sel1" name="sellist1">
+                                        <option value="">Select Asset</option>
+                                        <option ng-repeat="asset in assets" value="{{asset.id}}">
+                                            {{asset.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="zoneType"><b>Select Zone </b>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!zone">*</span></label>
+                                    <select ng-model="zone" class="form-control" id="sel1" name="sellist1">
+                                        <option value="">Select Zone</option>
+                                        <option ng-repeat="zone in zones" value="{{zone.id}}">
+                                            {{zone.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-4"></div> -->
+                            <div class="col-lg-2">
+                                <label for="pwd">&nbsp;</label>
+                                <button ng-click="mappingassetdevice()" class="btn btn-primary btn-block"
+                                    ng-disabled="!asset || !zone">Link</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <h5 class="text-white">Map Asset & Zone</h5>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="mappiguserzone" class="display table nowrap table-striped table-hover"
+                                    width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Asset Name</th>
+                                            <th>Asset Class</th>
+                                            <th>Asset Sub-class</th>
+                                            <th>Zone Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>

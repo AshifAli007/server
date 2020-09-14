@@ -1,0 +1,170 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<toaster-container></toaster-container>
+<!-- Banner Part starts -->
+<div class="bg-statement pb-3" ng-cloak>
+    <div class="container">
+        <div class="pt-3 pb-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="../images/food.svg" class="zoom d-block mx-auto" alt="" />
+                </div>
+                <div class="col-md-10">
+                    <h2 class="text-dark mt-2 font-bold">FoodCart Management</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-cloak>
+    <div class="container bg-dark mt-5 form-wrapper-border">
+        <ul class="nav nav-tabs " role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="" data-target="#home" data-toggle="tab">Individual Provisioning</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" data-target="#menu1" data-toggle="tab">Bulk Provisioning</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="row tab-content">
+            <div id="home" class="container tab-pane active">
+                <form name="foodCartConfig" novalidate>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label for="foodCartNo">FoodCart Id
+                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                    ng-show="!foodCartNo">*</span></label>
+                            <input name="foodCartNo" ng-model="foodCartNo" type="text" class="form-control"
+                                placeholder="Enter FoodCart Number" ng-pattern="/^[a-zA-Z0-9_ -]*$/" required>
+                            <span ng-if="foodCartConfig.foodCartNo.$error.pattern "
+                                class="form-text text-danger p-l-10">No special character are allowed.</span>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="venderName">Vendor Id
+                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                    ng-show="!venderName">*</span></label>
+                            <input name="venderName" ng-model="venderName" type="text" class="form-control"
+                                placeholder="Enter Vendor Id">
+                            <span ng-if="foodCartConfig.venderName.$error.pattern "
+                                class="form-text text-danger p-l-10">No special character are allowed.</span>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="gateWay">Device Id
+                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                    ng-show="!gateWay">*</span></label>
+                            <select ng-model="gateWay" class="form-control">
+                                <option value="">Select Gateway</option>
+                                <option ng-repeat="gateWay in foodGatewayList" value={{gateWay.id}}>
+                                    {{gateWay.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary col-md-2 mx-auto d-block btn-md mb-3" ng-if="!isedit"
+                        ng-disabled="!foodCartNo ||!venderName || !gateWay" ng-click="addUpdatefoodCart()">Save</button>
+                    <button class="btn btn-primary col-md-2 mx-auto d-block btn-md mb-3" data-toggle="modal"
+                        data-target="#exampleModal" ng-if="isedit"
+                        ng-disabled="!foodCartNo ||!venderName || !gateWay">Update</button>
+                </form>
+            </div>
+
+            <div id="menu1" class="container tab-pane fade"><br>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <button id="downloadSampleCsv" class="btn btn-primary"
+                                ng-click="downlaod()">DownloadSampleCSV</button>
+                        </div>
+                    </div>
+                    <div class="browse-wrap">
+                        <div class="title" ng-if="!myFile.name">Choose a file to upload</div>
+                        <input id="imageLoader" class="upload" name="imageLoader" type="file" accept=".csv"
+                            file-model="myFile" title="Choose a file to upload" />
+                        <span class="upload-path">{{myFile.name}}</span>
+                    </div>
+                    <div class="text-center m-t-20">
+                        <button class="btn btn-primary" ng-click="uploadCsv()" ng-disabled="!myFile">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--code for modal window starts-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Update FoodCart
+                            Management</b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to update this data ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" ng-click="addUpdatefoodCart()" class="btn btn-primary"
+                        data-dismiss="modal">Yes,
+                        Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--code for modal window ends-->
+
+    <div class="mt-5">
+        <div class="card" ng-show="showTable == false">
+            <div class="card-header bg-dark">
+                <h5 class="text-white">FoodCart List</h5>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table id="foodCart" class="display table nowrap table-striped table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>FoodCart Id</th>
+                                <th>Vendor Id</th>
+                                <th>Unique Id</th>
+                                <th>Device Id</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card" ng-show="showTable == true">
+            <div class="card-header bg-dark">
+                <h5 class="text-white">FoodCart List</h5>
+            </div>
+            <div class="card-block">
+                <div class="c-wrap mx-2">
+                    <i class="feather icon-file-text mx-auto d-block text-center text-dark" style="font-size: 36px;"
+                        aria-hidden="true"> </i>
+                    <p class="text-center text-dark" style="margin: 10px 0px;">No records Found!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>
+<!-- Banner Part End -->
+<script>
+    $(document).ready(function () {
+        $('.upload-form input').change(function () {
+            $('.upload-form p').text(this.files.length + " file(s) selected");
+        });
+    });
+</script>

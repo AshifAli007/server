@@ -1,0 +1,117 @@
+<div class="container-fluid container-fixed-lg sm-p-l-5" style="margin-top: 15px;">
+
+    
+            <!-- START CONTAINER FLUID -->
+            <div class="row">
+                    <div class="col-md-12 m-b-10">
+                <div class="col-md-12">
+                        <!-- START PANEL -->
+                        <div class="panel panel-default">
+                          <div class="panel-heading separator">
+                              <div class="panel-title ">
+                                  Reporting
+                              </div>
+            
+            
+                          </div>
+            
+                        </br>
+                            <div class="panel-body">
+            
+                                <form role="form">
+            
+                                    <div class="form-group col-md-2">
+                                        <label>Report Type</label>
+                                        <select class="form-control"  ng-model="repType"  >
+                                            <option value="">Select Report Type</option>
+                                            <option value="1">Today</option>
+                                            <option value="2">Date Wise</option>
+                                        </select>
+                                    </div>
+                                    <div ng-show="repType==2" class="form-group col-md-3">
+                                            <label>Date Range</label> 
+                                    <div  class="input-daterange input-group" id="datepicker-range" ui-jq="datepicker">
+                                            
+                                        <input type="text" class="input-sm form-control" name="start" ng-model="startDate" />
+                                        
+                                            <span class="input-group-addon">to</span>
+                                        <input type="text" class="input-sm form-control" name="end" ng-model="endDate" />
+                                    </div>
+                                    </div>
+                                 
+                                    <div class="form-group col-md-2">
+                                            <label>Zone List</label>
+                                            <select class="form-control"  ng-model="Zone"  >
+                                                    <option value="">Select Zone</option>
+                                                    <option ng-repeat="zone in zoneData" value="{{zone.id}}">
+                                                        {{zone.zoneName}}
+                                                    </option>
+                                            </select>
+                                        </div>
+        
+                             
+                                    <div  class="form-group col-md-2">
+                                        <label>Employee List</label>
+                                        <select class="form-control"  ng-model="Employee"  >
+                                            <option value="">Select Employee</option>
+                                            <option ng-repeat="emp in empData" value="{{emp.empId}}">
+                                                {{emp.fullName}}
+                                            </option>
+                                        </select>
+                                     
+                                    </div>
+                                   
+            
+                           
+            
+                                    <div class="form-group col-md-3" >
+            
+                                      <button title="Save new cellsite"  style="top: 25px;" ng-click="showRep()" type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-search">
+                                          <span>Show</span>
+                                      </button>
+        
+                                    </div>
+                                </form>
+                            </div>
+            
+            
+            
+                            </br>
+                        <div class="panel-body">
+                            <div class="panel-heading separator">
+                            <div class="panel-title">
+                                Reporting data
+                            </div>
+            
+                            <div class="panel-body">
+        
+                                <table id="reportingTable" class="display" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Zone Name</th>
+                                        <th>User Name</th>
+                                        <th>Entry Time</th>
+                                        <th>Exit Time</th>
+                                        <th>Message</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                
+                                </table>
+                            </div>
+            
+            
+                        </div>
+                        </div>
+                        <!-- END PANEL -->
+                    </div>
+                </div>
+                </div>
+    <!-- END CONTAINER FLUID -->
+    
+    
+      </div>
+
+    </div>
+    <!-- END CONTAINER FLUID -->
+    

@@ -1,0 +1,271 @@
+****************device_detail table modification*********************
+
+Add isBuzz field in device_detail
+
+    alter table device_detail add column isBuzz tinyint(8) default 0;
+
+Add createDate field in device_detail table
+
+    alter table device_detail add column createDate timestamp  default current_timestamp;
+
+Rename 	empId field in device_detail
+
+   	alter table device_detail change column  empId assetId int(32);
+
+
+******************employee_detail table modification*********************
+
+Rename table employee_detail to asset_detail
+
+   	rename table employee_detail to asset_detail;
+
+Rename field empId in asset_detail table
+
+	alter table asset_detail change column  empId uniqueId varchar(32);
+
+Add createDate field in asset_detail table
+
+	alter table asset_detail add column createDate timestamp  default current_timestamp;
+
+Rename field fullName in asset_detail table
+
+	alter table asset_detail change column  fullName name varchar(64);
+
+Rename field userType in asset_detail table
+
+	alter table asset_detail change column  userType type int(32);
+
+
+****************map_user_zone table modification******************
+
+	alter table map_user_zone change column empId assetId int(32);
+
+
+
+*******************zone_detail table modification*******************
+
+	alter table zone_detail add column zone_image varchar(120);
+
+	
+
+*******************device_detail table modification****************
+
+	alter table device_detail add column batteryStatus int(8) default 100;
+
+
+
+Add nodeStatusTime field in device_detail table
+
+	alter table device_detail_1 add column nodeStatusTime bigint(16) DEFAULT NULL;
+
+
+Add pubAddress field in device_detail table
+
+	alter table device_detail_1 add column pubAddress varchar(64);
+
+Add subAddress field in device_detail table
+
+	alter table device_detail_1 add column subAddress varchar(64);
+
+Add healthAddress field in device_detail table
+
+	alter table device_detail_1 add column healthAddress varchar(64);
+
+Add nodeType field in device_detail table
+
+	alter table device_detail_1 add column nodeType int(8);
+
+
+Add zoneId field in device_detail table
+
+	alter table device_detail_1 add column zoneId int(32);
+
+
+Add x_axis field in device_detail table
+
+	alter table device_detail_1 add column x_axis int(32);
+
+Add y_axis field in device_detail table
+
+	alter table device_detail_1 add column y_axis int(32);
+
+Add z_axis field in device_detail table
+
+	alter table device_detail_1 add column z_axis int(32);
+
+Add Led field in zone_detail
+
+	alter table zone_detail add column led int(32);
+
+
+Insert Kpi data for KC001
+
+	insert into kpi_detail_1 set kpiId='KC001', kpiName='No. of Infiltrations', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 0, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KC002
+
+	insert into kpi_detail_1 set kpiId='KC002', kpiName='Productive Time', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 1, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KC003
+
+	insert into kpi_detail_1 set kpiId='KC003', kpiName='Non-Productive Time', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 0, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KC004
+
+	insert into kpi_detail_1 set kpiId='KC004', kpiName='Unauthorised Count', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 0, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+Insert Kpi data for KC005
+
+	insert into kpi_detail_1 set kpiId='KC005', kpiName='Max Count Voilations', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isMax": 1, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KC006
+
+	insert into kpi_detail_1 set kpiId='KC006', kpiName='No. of Entry', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isEntry":true, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KC007
+
+	insert into kpi_detail_1 set kpiId='KC007', kpiName='No. of Exit', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isEntry":false, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KS001
+
+	insert into kpi_detail_1 set kpiId='KS001', kpiName='Performance stats', type=1, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KA001
+
+	insert into kpi_detail_1 set kpiId='KA001', kpiName='Productive Time', type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 1, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KA002
+
+	insert into kpi_detail_1 set kpiId='KA002', kpiName='Allowed Zones Visited', type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 1, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KA003
+
+	insert into kpi_detail_1 set kpiId='KA003', kpiName='Longest Productive Hours', type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 1, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KA004
+
+	insert into kpi_detail_5 set kpiId='KA004', kpiName='Shortest Productive Hours',type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 1, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KA005
+
+	insert into kpi_detail_1 set kpiId='KA005', kpiName='Non-Productive Time', type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 0, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+
+Insert Kpi data for KA006
+
+	insert into kpi_detail_1 set kpiId='KA006', kpiName='Longest Non-Productive Hours', type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 0, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+Insert Kpi data for KA007
+
+	insert into kpi_detail_1 set kpiId='KA007', kpiName='Not-Allowed Zones Visited', type=2, query='{"time": {"$gte": "", "$lte": ""}, "type": "", "zoneId": "", "plantId":"", "companyId": "", "isAllowed": 0, "empId": "", "assetTypeId": "", "assetSubTypeId": ""}';
+
+
+
+
+
+alter table device_detail_1 change column battery batteryStatus int(8) Default 1;
+
+alter table device_detail_1 add column batteryStatusTime bigint(16);
+
+alter table kpi_detail_1 add column type int(8);
+
+
+Adding Rule in Rule table
+INSERT INTO `rule` VALUES (1,1,'Access violation','in','Access violation','Authorised Access',NULL,'Authorised access to mapped zones','NULL'),(2,2,'Max count in zone','>','Zone Max Count Reached',NULL,1,'Max no. of user allowed in zone','maxUsers'),(3,3,'Min count in zone','<','Zone Min Count Reached',NULL,1,'Min no. of user allowed in zone','minUsers'),(4,4,'Max time in zone','>','Max Time Reached In Zone',NULL,1,'Max time(mins) of user in zone','allowed_time');
+
+
+alter table asset_detail_1 modify column uniqueId varchar (64) NOT NULL;
+
+alter table device_detail_1 add column zoneType int(8);
+
+alter table device_detail_1 add column status int(8) default 1;
+
+alter table device_detail_1 modify column networkId varchar(64);
+
+alter table node_neighbour_detail_1 add column zoneType int(8);
+
+alter table node_neighbour_detail_1 add column nodeType int(8);
+
+Create Plant query
+
+create table plant_detail_1 (id INT(32) NOT NULL AUTO_INCREMENT, name VARCHAR(128), address VARCHAR(128), latitude double(11,8), longitude double(11,8),  PRIMARY KEY (id), UNIQUE(name));
+
+alter table floor_plan_1 add column plantId int(32);
+
+ALTER TABLE plant_detail_1 ADD UNIQUE (name);
+
+INSERT INTO kpi_detail_6 SELECT * FROM kpi_detail_5;
+
+CREATE TABLE table2 LIKE table1;
+
+ALTER TABLE zone_detail_1 DROP INDEX led;
+
+ALTER TABLE device_detail_1 DROP INDEX genericId;
+
+alter table device_detail_1 add column deviceKey varchar(64);
+
+db.networks.updateMany({},{$set:{"provisioners.0.sequenceNumber": 0}});
+
+var qry = `delete from device_detail_${companyId} where serial='${tmpObj.serial}'`;
+
+alter table bus_detail_4 modify column busNo varchar(64) NOT NULL;
+
+alter table bus_detail_4 modify column venderName varchar(64) NOT NULL;
+
+alter table food_cart_detail_4 modify column foodCartNo varchar(64) NOT NULL;
+
+alter table food_cart_detail_4 modify column venderName varchar(64) NOT NULL;
+
+alter table device_detail_1 add column provisioningState int(8);
+
+alter table plant_detail_1 add column plantType int(8);
+
+alter table node_neighbour_detail_4 add column deviceId int(32);
+
+ALTER TABLE node_neighbour_detail_4 AUTO_INCREMENT=1
+
+alter table device_detail_1 add column currentVersion varchar(64);
+alter table device_detail_1 add column resetReason int(8);
+
+
+var gatewayId = row[0].id;
+if(node.deviceType === 2 && node.nodeType === 1) {
+	var findNeighbourNodes = `select neighbourNodeId from node_neighbour_detail_${companyId} where (nodeId='${node.nodeId}' AND gatewayId='${gatewayId}' AND zoneId='${node.zoneId}')`;
+	logger.debug("Query for neighbour node list for nodeId, zoneId and gatewayId: " + findNeighbourNodes);
+	db.query(findNeighbourNodes, (error, neighbourNodes, fields) => {
+		if (error) {
+			dbFunc.connectionRelease;
+			reject(error);
+		}else if(neighbourNodes.length > 0){
+			var a = [];
+			neighbourNodes.forEach(function(id){
+				a.push(id.neighbourNodeId);
+			});
+			node['neighbourNodes'] = a;
+			return node;
+			
+		}
+	});
+}
+
+
+
+ Final query
+ db.notifications.aggregate([{ "$match":{"time": {"$gte": "1563518949000", "$lte": "1563692349000"}, "type":0, "companyId": 1, "isAllowed": 0}}, {$group: {"_id": 123, "total": {$sum: { $cond: [ {$and: [{$gte: ["$time", "1563518949000"]}, {$lte: ["$time", "1563560940000"]} ]},1,0 ] } }, "documents": {$push: "$$ROOT"} }}]);
+
+
+
+

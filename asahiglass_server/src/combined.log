@@ -1,0 +1,81 @@
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection: Error: connect ECONNREFUSED 127.0.0.1:3306","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"Requested data in login model: {\"email\":\"admin@wavenetcorp.com\",\"password\":\"root123\"}","level":"info"}
+{"message":"Query for seleect : SELECT * FROM userInfo WHERE email ='admin@wavenetcorp.com'","level":"info"}
+{"message":"User password: [object Object]","level":"info"}
+{"message":"server started on port 3000 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"Requested data in login model: {\"email\":\"admin@wavenetcorp.com\",\"password\":\"root123\"}","level":"info"}
+{"message":"Query for seleect : SELECT * FROM userInfo WHERE email ='admin@wavenetcorp.com'","level":"info"}
+{"message":"User password: [object Object]","level":"info"}
+{"message":"Requested data in login model: {\"email\":\"admin@wavenetcorp.com\",\"password\":\"root123\"}","level":"info"}
+{"message":"Query for seleect : SELECT * FROM userInfo WHERE email ='admin@wavenetcorp.com'","level":"info"}
+{"message":"User password: [object Object]","level":"info"}
+{"message":"Requested data in login model: {\"email\":\"admin@wavenetcorp.com\",\"password\":\"root123\"}","level":"info"}
+{"message":"Query for seleect : SELECT * FROM userInfo WHERE email ='admin@wavenetcorp.com'","level":"info"}
+{"message":"User password: [object Object]","level":"info"}
+{"message":"server started on port 8080 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"server started on port 8080 (development)","level":"info"}
+{"message":"Mysql connection success: success","level":"info"}
+{"message":"Requested data in login model: {\"email\":\"admin@wavenetcorp.com\",\"password\":\"root123\"}","level":"info"}
+{"message":"Query for seleect : SELECT * FROM userInfo WHERE email ='admin@wavenetcorp.com'","level":"info"}
+{"message":"User password: [object Object]","level":"info"}

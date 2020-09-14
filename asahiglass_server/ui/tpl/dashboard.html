@@ -1,0 +1,408 @@
+<style>
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+#parent {
+    position:relative;
+    padding:0;
+    
+}
+#zone{
+    position:relative;
+    padding:0;
+}
+
+#zone div:nth-child(1) {
+    height: 624px;
+border-style: dashed;
+width: 212px;
+margin-top: -50%;
+z-index: 1000;
+margin-left: 275px;
+color: blueviolet;
+}
+
+#zone div:nth-child(2) {
+    height: 624px;
+border-style: dashed;
+width: 355px;
+margin-top: -624px;
+z-index: 1000;
+margin-left: 489px;
+color: gray;
+}
+
+#zone div:nth-child(3) {
+    height: 624px;
+border-style: dashed;
+width: 360px;
+margin-top: -624px;
+z-index: 1000;
+margin-left: 847px;
+color: chocolate;
+}
+
+#zone div:nth-child(4) {
+    height: 178px;
+border-style: dashed;
+width: 176px;
+margin-top: -866px;
+z-index: 1000;
+margin-left: 369px;
+color: green;
+}
+
+#zone div:nth-child(5){
+    height: 178px;
+border-style: dashed;
+width: 230px;
+margin-top: -864px;
+z-index: 1000;
+margin-left: 384px;
+color: gray;
+}
+
+#emp{
+    position:relative;
+    padding:0;
+}
+
+#emp div:nth-child(1) {
+    margin-top: 2%;
+    margin-left: 34%;
+}
+
+#emp div:nth-child(2) {
+    margin-top: -21%;
+    margin-left: 68%;
+}
+
+#emp div:nth-child(3) {
+    margin-top: -12%;
+    margin-left: 58%;
+}
+
+#emp div:nth-child(4) {
+    margin-top: 1%;
+    margin-left: 52%;
+}
+
+#emp div:nth-child(5) {
+    margin-top: 2%;
+    margin-left: 52%;
+}
+
+#emp div:nth-child(6) {
+    margin-top: -10%;
+    margin-left: 34%;
+}
+
+#emp div:nth-child(7) {
+    margin-top: 25%;
+    margin-left: 10%;
+}
+
+#emp div:nth-child(8) {
+    margin-top: -3%;
+    margin-left: 19%;
+}
+
+#emp div:nth-child(9) {
+    margin-top: -10%;
+    margin-left: 52%;
+}
+
+
+#emp div:nth-child(10) {
+    margin-top: -10%;
+    margin-left: 42%;
+}
+
+#emp div:nth-child(11) {
+    margin-top: -17%;
+    margin-left: 14%;
+}
+
+p {
+    position:absolute;
+    border:2px solid;
+    margin:0;
+    padding:5px;
+    background-color: blue;
+}
+
+#nonEdge{
+    position:relative;
+    padding:0;
+    
+}
+
+
+
+#nonEdge i:nth-child(1) {
+    margin-top: 25%;
+    margin-left: 14%;
+}
+
+#nonEdge i:nth-child(2) {
+    margin-top: 25%;
+    margin-left: 62%;
+}
+
+#nonEdge i:nth-child(3) {
+    top:65%;
+    left:60%; 
+}
+
+
+
+
+p:nth-child(1) {
+    border-color:blue;
+    top:0;
+    left:0;    
+}
+p:nth-child(2) {
+    border-color:blue;
+    top:0;
+    right:0;
+}
+p:nth-child(3) {
+    border-color:blue;
+    bottom:0;
+    left:0;
+}
+p:nth-child(4) {
+    border-color:blue;
+    bottom:0;
+    right:0;
+}
+
+p:nth-child(5) {
+    border-color:blue;
+    top:0;
+    left:50%;
+}
+
+p:nth-child(6) {
+    border-color:blue;
+    bottom:0;
+    left:50%;
+}
+
+p:nth-child(7) {
+    border-color:blue;
+    top:0;
+    left:60%;
+}
+
+p:nth-child(8) {
+    border-color:blue;
+    top:0;
+    left:80%;
+}
+
+
+p:nth-child(9) {
+    border-color:blue;
+    bottom:20%;
+    right:0;
+}
+
+p:nth-child(10) {
+    border-color:blue;
+    bottom:40%;
+    right:0;
+}
+
+
+p:nth-child(11) {
+    border-color:blue;
+    bottom:60%;
+    right:0;
+}
+
+p:nth-child(20) {
+    border-color:blue;
+    bottom:75%;
+    right:0;
+}
+
+p:nth-child(12) {
+    border-color:blue;
+    bottom:0;
+    left:20%;
+}
+
+p:nth-child(13) {
+    border-color:blue;
+    bottom:0;
+    left:40%;
+}
+p:nth-child(14) {
+    border-color:blue;
+    bottom:0;
+    left:60%;  
+}
+
+p:nth-child(15) {
+    border-color:blue;
+    bottom:0;
+    left:80%;    
+}
+
+p:nth-child(16) {
+    border-color:blue;
+    bottom:20%;
+    left:0;    
+}
+
+p:nth-child(17) {
+    border-color:blue;
+    bottom:40%;
+    left:0;    
+}
+
+p:nth-child(18) {
+    border-color:blue;
+    bottom:60%;
+    left:0;    
+}
+
+p:nth-child(19) {
+    border-color:blue;
+    bottom:75%;
+    left:0;    
+}
+</style>
+
+
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid padding-25 sm-padding-10 sm-gutter">
+    <!-- Zone Summary Start -->
+    <div class="">
+       <div class="">
+          <div class="">
+             <div class="row">
+                <div class="col-md-12">
+                   <div pg-portlet id="portlet-linear" class="panel panel-default" progress="bar" on-refresh="refreshTest('#portlet-linear')">
+                      <div class="panel-heading separator">
+                         <div class="panel-title">Wavenet
+                         </div>
+                         <div class="panel-controls">
+                            <ul>
+                               <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                               </li>
+                            </ul>
+                         </div>
+                      </div>
+                      <div class="panel-body">
+                         </br>
+
+                        <!-- START ROW -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-10">
+                                <div class="col-md-12">
+                                    <!-- START PANEL -->
+                                    <div class="panel panel-default">
+                                        <!-- <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Plant Name
+                                            </div>
+                                        </div> -->
+                                    
+                                        <div class="panel-body" style="height: 1048px;">
+                                            <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="form-group ">
+                                                    <select class="form-control"  ng-model="zoneId" ng-change="zoneChange(zoneId)"  >
+                                                        <option value="">All Zones</option>
+                                                        <option ng-repeat="zone in zoneData" value="{{zone.id}}">
+                                                            {{zone.zoneName}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                
+                                            </div>
+                                        </div>
+                                    
+                                            <div class="row">
+                                                <div ng-hide="show" class="col-md-12">
+                                                        <img src="../assets/img/AsileWavenet.png" style="width: 100%; height: 944px;">
+                                                        <div id="zone" >
+                                                                <div ng-repeat="zonedata in zone">
+                                                    
+                                                                        <center style="font-size: large;font-weight: bold;">
+                                                                            {{zonedata.zoneName}}
+                                                                        </center>
+                                                                </div>
+                                                        </div>
+                                                </div> 
+                                                
+                                                <div ng-show="show" class="col-md-12">
+                                                        <div class="col-md-12 m-b-10">
+                                                            
+                                                            <div ng-style="bgImage"  class="widget-8 panel no-border bg-success no-margin widget-loader-bar" pg-portlet progress="bar" on-refresh="refreshTest('.widget-8')">
+                                                                <div class="container-xs-height full-height" id="parent" style="border: 1px dashed red;">
+                                                                        <p ng-repeat="node in edgeNodes">
+                                                                            
+                                                                        </p>
+                                                                        
+                                                            
+                                                                        <div id="nonEdge"  >
+                                                                            <!-- <span ng-repeat="node in nonEdgeNode">
+                                                                                    Mushir
+                                                                            </span> -->
+                                                                                <i ng-repeat="node in nonEdgeNode"  style="color:blue" class="fa fa-square"></i> 
+                                                                    
+                                                                        </div>   
+                                                                        
+                                                                    <div id="emp">
+                                                                        <div ng-repeat="emp in empIcon" >
+                                                                    
+                                                                            <img ng-if="emp.isAllowed === 1" style="width: 40px;" title="Name:{{emp.empName}} & Emp Id: {{emp.empId}}" src="../assets/img/user_allowed.png">
+                                                                            <img ng-if="emp.isAllowed === 0" style="width: 40px;" title="Name:{{emp.empName}} & Emp Id: {{emp.empId}}" src="../assets/img/user_not_allowed.png">
+
+                                                                        </div>
+                                                                    </div>   
+
+                                                                    
+                                                                </div>
+                                                            </div> 
+                                                </div>
+                                            </div>
+
+                                                </div>
+                                    
+
+                                        </div>
+                                    </div>
+                                    <!-- END PANEL -->
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- END ROW -->
+
+                         
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <!-- Zone Summary End -->
+
+
+</div>
+
+
+
+
+<!-- END CONTAINER FLUID -->

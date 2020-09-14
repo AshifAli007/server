@@ -1,0 +1,239 @@
+<style>
+   .allowed{
+    background: linear-gradient(-135deg, #379c03 0%, #d3e91d 100%);
+    border-radius: 5px;
+   }
+   
+   .notallowed{
+    background: linear-gradient(-135deg, #f76b1a 0%, #fba60c 100%);
+    border-radius: 5px;
+   }
+   .empty{
+    background: linear-gradient(-135deg, #379c03 0%, #d3e91d 100%);
+    border-radius: 5px;
+   }
+   .allowed:hover{
+    box-shadow: #000000cf 1px 1px 10px;
+}
+.notallowed:hover{
+    box-shadow: #000000cf 1px 1px 10px;
+}
+.empty:hover{
+    box-shadow: #000000cf 1px 1px 10px;
+}
+
+p {
+    margin: 0 0 1rem 0;
+}
+
+.material-icons {
+  vertical-align: middle;
+  line-height: 0;
+  margin-top: -5px;
+}
+
+/*
+ * Tabs
+ */
+
+.tabs {
+    padding: 0;
+}
+
+.tabs .tab-input {
+    display: none;
+}
+
+.tabs .tab-label {
+    color: #ddd;
+    cursor: pointer;
+    float: left;
+    padding: 7px;
+    text-align: center;
+}
+
+.tabs-full .tab-label {
+    display: table-cell;
+    float: none;
+    width: 1%;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.tabs .tab-label:hover {
+    color: #333;
+}
+.dataTables_filter { visibility: hidden;}
+.tabs .tab-input:checked + .tab-label {
+    background-color: #3f4d67;
+color: #FFF;
+border: 1px solid black;
+}
+
+.tabs .tabs-wrap {
+    clear: both;
+}
+
+.tabs .tab {
+    background-color: #fff;
+    display: none;
+    padding: 1em;
+}
+
+.tabs .tab > *:last-child {
+    margin-bottom: 0;
+}
+
+#tab1:checked ~ .tabs-wrap #tab1content,
+#tab2:checked ~ .tabs-wrap #tab2content,
+#tab3:checked ~ .tabs-wrap #tab3content {
+    display: block;
+}
+   
+</style>
+    <!-- [ Main Content ] start -->
+    <section class="custom-height" >
+      <div class="pcoded-main-container">
+          <div class="pcoded-wrapper">
+              <div class="pcoded-content">
+                  <div class="pcoded-inner-content">
+                      <!-- [ breadcrumb ] start -->
+                      <div class="page-header">
+                          <div class="page-block">
+                              <div class="row align-items-center">
+                                  <div class="col-md-12">
+                                      <div class="page-header-title">
+                                          <h5 class="m-b-10">Factory Zones</h5>                                          
+                                      </div>
+                                      <!--<ul class="breadcrumb">
+                                          <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                          <li class="breadcrumb-item"><a href="#!">Crypto Dashboard</a></li>
+                                      </ul>-->
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- [ breadcrumb ] end -->
+                      <div class="main-body">
+                          <div class="page-wrapper">
+                              <!-- [ Main Content ] start -->
+                              <div class="row">
+                                  <!-- [ bitcoin-wallet section ] start-->
+                                  <!-- <div ng-repeat="zone in zoneData" class="col-md-6 col-xl-3">
+                                      <div class="card  bitcoin-wallet" ng-class="{allowed : zone.allowedUsers > 0 && zone.notallowedUsers == 0, notallowed : zone.allowedUsers > 0 && zone.notallowedUsers > 0 || zone.allowedUsers == 0 && zone.notallowedUsers > 0, empty : zone.allowedUsers == 0 && zone.notallowedUsers == 0}">
+                                          <div class="card-block">
+                                                  <h5 class="text-white mb-2"><a href="#/app/zonedetail">{{zone.name}}</a></h5>
+                                                  <div class="">
+                                                      <img class="rounded-circle mb-2" style="width:40px;" src="../assets_new/images/user/avatar-2.jpg" alt="activity-user"><span class="text-white f-20"> Allowed: {{zone.allowedUsers}}</span>
+                                                  </div> 
+                                                       
+                                                  <div class="">
+                                                          <img class="rounded-circle" style="width:40px;" src="../assets_new/images/user/red-avatar-2.jpg" alt="activity-user"><span class="text-white f-20"> Not Allowed: {{zone.notallowedUsers}}</span>
+                                                   </div>  
+                                          </div>
+                                      </div>
+                                  </div> -->
+
+
+
+                                    <div ng-repeat="zone in zoneData" class="col-md-6 col-xl-4">
+                                        <a style="cursor: pointer;" ng-click="zonemap($index, zone)">
+                                                <div class="card  bitcoin-wallet"  ng-class="{allowed : zone.allowedUsers > 0 && zone.notallowedUsers == 0, notallowed : zone.allowedUsers > 0 && zone.notallowedUsers > 0 || zone.allowedUsers == 0 && zone.notallowedUsers > 0, empty : zone.allowedUsers == 0 && zone.notallowedUsers == 0}">
+                                                        <div class="card-block">
+                                                                <h4 class="text-white mb-2">{{zone.name}}</h4>
+                                                                <hr/>
+                                                                <div class="">
+                                                                    <img class="rounded-circle mb-2" style="width:30px;" src="./assets_new/images/user/avatar-2.jpg" alt="activity-user"><span class="text-white f-18">&nbsp; &nbsp; Allowed: {{zone.allowedUsers}}</span>
+                                                                    <img class="position-absolute mb-2" ng-if="zone.allowedUsers > 0 && zone.notallowedUsers > 0 || zone.allowedUsers == 0 && zone.notallowedUsers > 0" style="width:55px; bottom:10%; right:10%;" src="./assets_new/images/warning.svg" alt="activity-user">
+                                                                    <img class="position-absolute mb-2" ng-if="zone.allowedUsers > 0 && zone.notallowedUsers == 0 || zone.allowedUsers == 0 && zone.notallowedUsers == 0" style="width:55px; bottom:10%; right:10%;" src="./assets_new/images/shield.svg" alt="activity-user">
+                                                                
+                                                                </div> 
+                                                                     
+                                                                <div class="">
+                                                                        <img class="rounded-circle" style="width:30px;" src="./assets_new/images/user/avatar-22.jpg" alt="activity-user"><span class="text-white f-18">&nbsp; &nbsp; Not Allowed: {{zone.notallowedUsers}}</span>
+                                                                    </div>  
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                        </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-xl-8 col-md-6">
+                                    <div class="card">
+                                            <div class="card-header">
+                                                <h5>Real Time Notifications</h5>
+                                            </div>
+                                            <div class="card-block coustomBlock" style="padding: 5px !important;">
+                                                    <div class="table-responsive" style="height:292px">
+                                                            <table  id="realtimeTable" class="display" width="100%" cellspacing="0" >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Zone Name</th>
+                                                                        <th>Name</th>
+                                                                        <th>Type</th>
+                                                                        <th> Entry Time</th>
+                                                                        <th>Exit Time</th>
+                                                                        <th>Event Message</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                    </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            <!-- [ worldLow section ] end-->
+
+                            <!-- [ statistic chat ] start -->
+                            <div class="col-xl-4 col-md-6">
+
+                                   <div class="card">
+                                       <div class="card-block border-bottom">
+                                          <div class="row d-flex align-items-center">
+                                              <div class="col-auto">
+                                                  <i class="feather icon-users f-30 text-c-blue"></i>
+                                              </div>
+                                              <div class="col">
+                                                  <h3 class="f-w-300">{{areaData.totalUser}} / {{areaData.allUser}}</h3>
+                                                  <span class="d-block text-uppercase">TOTAL ASSET IN FLOOR</span>
+                                              </div>
+                                          </div>
+                                      </div>     
+                                        <div class="card-block border-bottom">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-auto">
+                                                    <i class="feather icon-user f-30 text-c-green"></i>
+                                                </div>
+                                                <div class="col">
+                                                    <h3 class="f-w-300">{{areaData.allowedUser}}</h3>
+                                                    <span class="d-block text-uppercase">TOTAL Allowed</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-auto">
+                                                    <i class="feather icon-user f-30 text-c-red"></i>
+                                                </div>
+                                                <div class="col">
+                                                    <h3 class="f-w-300">{{areaData.notAllowedUser}}</h3>
+                                                    <span class="d-block text-uppercase">TOTAL Not Allowed</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <!-- [ statistic chat ] end -->
+                              </div>
+
+                              </div>
+                              <!-- [ Main Content ] end -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </section>
+      <!-- [ Main Content ] end -->

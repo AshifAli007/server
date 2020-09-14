@@ -1,0 +1,51 @@
+<!-- [ Main Content ] start -->
+<div ng-if="loading" class="loading">
+    <img src="../images/Spinner.gif" class="mx-auto d-block">
+</div>
+<section class="container" ng-init="loadData()" ng-cloak>
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header bg-dark text-white">
+                                        <h5 class="text-white">Select Floor</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label for="Device Type">Select Floor</label>
+                                                    <select ng-model="floor" class="form-control" id="sel1"
+                                                        ng-change="showFloorPanel(floor)" name="sellist1">
+                                                        <option value="">Select Floor</option>
+                                                        <option ng-repeat="floor in floors" value="{{floor}}">
+                                                            {{floor.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card" ng-show="showpanel">
+                                    <div class="card-header bg-dark">
+                                        <h5 class="text-white">Floor Layout</h5>
+                                    </div>
+                                    <div ng-style="floorImage" id="imgcan">
+                                        <canvas height="1000px" id="canvas"
+                                            style="background-color:transparent; width: 100%"></canvas>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+<!-- [ Main Content ] end -->

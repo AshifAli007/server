@@ -1,0 +1,99 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<toaster-container></toaster-container>
+<!-- Banner Part starts -->
+<div class="bg-statement pb-3" ng-cloak>
+  <div class="container">
+    <div class="pt-3 pb-3">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="../images/plant.svg" class="zoom d-block mx-auto" alt="" />
+        </div>
+        <div class="col-md-10">
+          <h2 class="text-dark mt-2 font-bold">OTA Upload</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5" ng-init="loadData()" ng-cloak>
+  <div class="main-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header bg-dark">
+            <h5 class="text-white">OTA upload</h5>
+          </div>
+          <div class="card-block">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for=""><b>Software Type</b>
+                    <span class="ng-invalid" style="color:red; font-weight:bold;" ng-show="">*</span></label>
+                    <select ng-model="type" class="form-control">
+                      <option value="">Select Type</option>
+                      <option ng-repeat="type in softwareTypes" value="{{type.id}}">
+                        {{type.name}}
+                      </option>
+                    </select>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for=""><b>Upload</b>
+                    <span class="ng-invalid" style="color:red; font-weight:bold;" ng-show="">*</span></label>
+                    <input type="file" file-model="segmenta" id="segment-A"  custom-on-change="segmentA" class="form-control" name="file"
+                    onload="onLoad" accept="bin/*">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="description"><b>Release Description </b>
+                    <span class="ng-invalid" style="color:red; font-weight:bold;" ng-show="">*</span></label>
+                  <input name="description" ng-model="description" type="text"
+                    class="form-control ng-pristine ng-untouched ng-valid" placeholder="Enter Description">
+                </div>
+              </div>
+              <!-- <div class="col-lg-4"></div> -->
+              <div class="col-lg-2">
+                <label for="">&nbsp;</label>
+                <button ng-click="uploadFile()" class="btn btn-primary btn-block">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header bg-dark">
+            <h5 class="text-white">OTA Upload</h5>
+          </div>
+          <div class="card-block">
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="otaDatatable" class="display table nowrap table-striped table-hover" width="100%">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Name</th>
+                      <th>Version</th>
+                      <th>Size</th>
+                      <th>CRC</th>
+                      <th>Description</th>
+                      <th>Uploaded On</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Banner Part End -->
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>

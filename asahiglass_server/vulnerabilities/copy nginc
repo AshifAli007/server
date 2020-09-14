@@ -1,0 +1,161 @@
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+
+
+
+#upstream allServer {
+#   least_conn;
+#   server 0.0.0.0:5000;
+#   server 0.0.0.0:5001;
+#}
+
+#upstream masterServer {
+#   server 0.0.0.0:5000;
+#}
+
+
+#server {
+#	listen 80 default_server;
+#	listen [::]:80 default_server ipv6only=on;
+	#server_name 0.0.0.0;
+        #return 302 https://$server_name$request_uri;
+#	listen 443 ssl;
+
+	#root /var/www/html;
+#	root /home/wavenet/PanasonicSeekit/seekitclient/adminPanel/dist/;
+
+	# Add index.php to the list if you are using PHP
+#	index index.html index.htm index.nginx-debian.html;
+
+	#server_name _;
+#	ssl_certificate /home/wavenet/wavenet/trackerserver/ssl/nodeServerCrt.crt;
+ #       ssl_certificate_key /home/wavenet/wavenet/trackerserver/ssl/nodeServerKey.key;
+
+#	location /supervisor {
+#		alias /home/wavenet/PanasonicSeekit/seekitclient/supervisorPanel/dist/;
+#		index index.html;
+#	}
+
+#	 location /tracker {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /users {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /ringtones {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /api/tracker/ringTone{
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /api/tracker/uploadFile {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /api/user/uploadFile {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /api/tracker/uploadRingTone {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	 location /api/tracker/uploadFirmware {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	location /api/downloadRingTone {
+#		proxy_pass https://masterServer;
+
+ #        }
+#	location /api/downloadFirmware {
+#		proxy_pass https://masterServer;
+
+ #        }
+
+
+#	 location /api{
+                #try_files $uri $uri/ =404;
+#		proxy_pass https://allServer;
+ #       }
+
+
+#}
+
+server {
+        listen 80 default_server;
+        server_name "";
+        server_tokens off;
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+        location / {
+               try_files $uri $uri/ =404;
+        }
+}
+
+server {
+	listen 80;
+	#listen [::]:80 default_server;
+	server_name 192.168.5.79;
+	# SSL configuration
+	
+	#root /var/www/html;
+	root /home/wavenet/wavenet/asahiglass_server/ui_new;
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
+
+	#server_name _;
+	#server_name localhost;
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+#		try_files $uri $uri/ =404;
+#	}
+
+	location /socket.io/ {
+            #add_header 'Access-Control-Allow-Origin' '*';
+            #add_header 'Access-Control-Allow-Credentials' 'true';
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection keep-alive;
+            #proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_pass http://localhost:3000;
+        }
+
+
+
+        location /v1/ {
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_pass http://localhost:3000;
+        }
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+	#
+	#location ~ \.php$ {
+	#	include snippets/fastcgi-php.conf;
+	#
+	#	# With php7.0-cgi alone:
+	#	fastcgi_pass 127.0.0.1:9000;
+	#	# With php7.0-fpm:
+	#	fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+}	

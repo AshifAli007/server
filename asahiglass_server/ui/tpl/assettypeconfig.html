@@ -1,0 +1,298 @@
+<style>
+    .material-icons {
+        vertical-align: middle;
+        line-height: 0;
+        margin-top: -5px;
+    }
+
+    /*
+      * Tabs
+      */
+
+    .tabs {
+        padding: 0;
+    }
+
+    .tabs .tab-input {
+        display: none;
+    }
+
+    .tabs .tab-label {
+        color: #ddd;
+        cursor: pointer;
+        float: left;
+        padding: 7px;
+        text-align: center;
+    }
+
+    .tabs-full .tab-label {
+        display: table-cell;
+        float: none;
+        width: 1%;
+        border: 1px solid;
+        border-radius: 3px;
+    }
+
+    .tabs .tab-label:hover {
+        color: #333;
+    }
+
+    .dataTables_filter {
+        visibility: hidden;
+    }
+
+    .tabs .tab-input:checked+.tab-label {
+        background-color: #3f4d67;
+        color: #FFF;
+        border: 1px solid black;
+    }
+
+    .tabs .tabs-wrap {
+        clear: both;
+    }
+
+    .tabs .tab {
+        background-color: #fff;
+        display: none;
+        padding: 1em;
+    }
+
+    .tabs .tab>*:last-child {
+        margin-bottom: 0;
+    }
+
+    #tab1:checked~.tabs-wrap #tab1content,
+    #tab2:checked~.tabs-wrap #tab2content,
+    #tab3:checked~.tabs-wrap #tab3content {
+        display: block;
+    }
+
+    div.browse-wrap {
+        top: 0;
+        left: 0;
+        margin: 20px;
+        cursor: pointer;
+        overflow: hidden;
+        padding: 20px 60px;
+        text-align: center;
+        position: relative;
+        background-color: #f6f7f8;
+        border: solid 1px #d2d2d7;
+    }
+
+    div.title {
+        color: #3b5998;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: tahoma, arial, sans-serif;
+    }
+
+    input.upload {
+        right: 0;
+        margin: 0;
+        bottom: 0;
+        padding: 0;
+        opacity: 0;
+        height: 300px;
+        outline: none;
+        cursor: inherit;
+        position: absolute;
+        font-size: 1000px !important;
+    }
+
+    span.upload-path {
+        text-align: center;
+        margin: 20px;
+        display: block;
+        font-size: 80%;
+        color: #3b5998;
+        font-weight: bold;
+        font-family: tahoma, arial, sans-serif;
+    }
+</style>
+<!-- [ Main Content ] start -->
+<toaster-container toaster-options="{'limit':1}"></toaster-container>
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Asset Type Configuration</h5>
+                                    </div>
+                                    <form name="assetTypeForm" novalidate>
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="assetTypeName"><b>Asset Type Name</b>
+                                                            <span class="ng-invalid"
+                                                                style="color:red; font-weight:bold;"
+                                                                ng-show="!assetTypeName">*</span></label>
+                                                        <input name="assetTypeName" ng-model="assetTypeName" type="text"
+                                                            class="form-control" placeholder="Enter Asset Type Name">
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="myModal">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <!-- Modal Header -->
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title"><b>Select Icon</b></h4>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body"
+                                                                style="max-height: 490px; overflow:auto;">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col"><b>Icon</b></th>
+                                                                            <th scope="col"><b>Action</b></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="icon in icons;">
+                                                                            <td><i class="{{icon.c}}"></i></td>
+                                                                            <td><button ng-click="selectIcon(icon.c)"
+                                                                                    type="button"
+                                                                                    class="btn btn-icon btn-rounded btn-success"
+                                                                                    data-dismiss="modal"><i
+                                                                                        class="feather icon-check"></i></button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="assetTypeName"><b>Select Icon</b>
+                                                            <span class="ng-invalid"
+                                                                style="color:red; font-weight:bold;"
+                                                                ng-show="!assetIcon">*</span></label>
+                                                        <input data-toggle="modal" data-target="#myModal"
+                                                            name="assetIcon" ng-model="assetIcon" type="text"
+                                                            class="form-control" placeholder="Select Icon" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 assets_attributes" ng-repeat="m in Customers">
+                                                    <label ng-show="$index < 2" for="assetTypeName"
+                                                        title="non editable mandatory attribute"
+                                                        data-trigger="hover"><strong> Default
+                                                            Attribute</strong></label>
+                                                    <input type="text" class="form-control" ng-disabled="$index < 2"
+                                                        value="{{m.Name}}" />
+                                                    <button class="btn feather icon-trash" ng-show="$index > 1"
+                                                        ng-click="Remove($index)"></button>
+                                                </div>
+                                            </div>
+                                            <table class="table col-sm-3" cellpadding="0" cellspacing="0">
+                                                <tfoot>
+                                                    <tr>
+                                                        <td class="pl-0 border-0"><input type="text"
+                                                                class="form-control" placeholder="Enter Property Name"
+                                                                ng-model="Name" />
+                                                        </td>
+                                                        <td class="border-0"><input type="button" class="form-control"
+                                                                ng-disabled="!Name" ng-click="Add()" value="Add" />
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+
+                                            <div>
+                                                <label for="pwd">&nbsp;</label>
+                                                <button type="button" class="btn btn-primary" ng-if="!isedit"
+                                                    ng-disabled="!assetTypeName || !assetIcon"
+                                                    ng-click="addUpdateAssetType(Customers)">Save</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#exampleModal" ng-if="isedit"
+                                                    ng-disabled="!assetTypeName || !assetIcon">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--code for modal window starts-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"><b>Update AssetType Configuration</b></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure to update this data ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="button" ng-click="addUpdateAssetType(Customers)"
+                                            class="btn btn-primary" data-dismiss="modal">Yes, Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--code for modal window ends-->
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card" ng-show="showTable == false">
+                                    <div class="card-header">
+                                        <h5>Asset Type List</h5>
+                                    </div>
+                                    <div class="card-block coustomBlock">
+                                        <table id="assettype" class="display table nowrap table-striped table-hover"
+                                            width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Asset Type Name</th>
+                                                    <th>Asset Type Icon</th>
+                                                    <th>Asset Type Attributes</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card" ng-show="showTable == true">
+                                    <div class="card-header">
+                                        <h5>Device List</h5>
+                                    </div>
+                                    <div class="card-block coustomBlock">
+                                        <div class="c-wrap mx-2">
+                                            <i class="feather icon-file-text mx-auto d-block text-center text-dark"
+                                                style="font-size: 36px;" aria-hidden="true"> </i>
+
+                                            <p class="text-center text-dark" style="margin: 10px 0px;">No records
+                                                Found! </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</section>
+<!-- [ Main Content ] end -->

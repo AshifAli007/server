@@ -1,0 +1,306 @@
+<style>
+  .dropdown-menu>li>a {
+    color: #212529 !important;
+  }
+
+  .dropdown-menu>li.active,
+  .dropdown-menu>li:active,
+  .dropdown-menu>li:focus,
+  .dropdown-menu>li:hover {
+    color: #16181b !important;
+    text-decoration: none !important;
+    background-color: #f8f9fa !important;
+  }
+
+  .dropdown-submenu {
+    position: relative;
+  }
+
+  .dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+  }
+
+  .dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+  }
+
+  .dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+  }
+
+  .dropdown-submenu.pull-left {
+    float: none;
+  }
+
+  .dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+  }
+
+  .customScroll {
+    overflow-y: auto;
+  }
+
+  .asset-search {
+    position: relative;
+  }
+
+  .asset-search input {
+    display: block;
+    width: 254px;
+    box-sizing: border-box;
+    border: 1px solid #E9E9E9;
+    font-size: 14px;
+    color: #8C8889;
+    line-height: 38px;
+    height: 40px;
+    float: left;
+    background: #ffffff;
+    padding: 0 16px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .asset-search .icon_search {
+    line-height: 20px;
+    text-align: center;
+    width: auto;
+    background: #000000;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #ffffff;
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .asset-search span {
+    font-size: 14px;
+    line-height: 0px;
+    bottom: -12px;
+    position: absolute;
+  }
+
+  .searchAssetList {
+    position: absolute;
+    width: 254px;
+    background-color: #fff;
+    list-style-type: none;
+    z-index: 1;
+    padding-left: 0;
+  }
+
+  .searchAssetList li {
+    padding: 6px 20px;
+    cursor: pointer;
+  }
+
+  .searchAssetList li:hover {
+    color: #16181b !important;
+    text-decoration: none !important;
+    background-color: #f8f9fa !important;
+  }
+
+  .searchAssetList li a {
+    color: #343a40 !important;
+    font-size: 15px;
+  }
+
+  /* .asset-search .icon_search:before {
+    content: "\e68a";
+  } */
+
+  .loginBox {
+    z-index: 10;
+    background: #cccccc;
+    width: 300px;
+    height: 260px;
+    padding: 10px;
+    position: absolute;
+  }
+</style>
+
+<div data-ng-controller="notificationSideBarCtrl" data-ng-init="init()">
+  <nav class="navbar navbar-expand-md bg-header navbar-dark" ng-if="Username">
+    <!-- absolute header circles -->
+    <img src="../images/circle.png" style="top: -15px; left: -22px;" alt="logo" class="position-absolute"></a>
+    <img src="../images/circle.png" style="top: -32px; right: 0px;" alt="logo" class="position-absolute"></a>
+    <img src="../images/circle.png" style="top: -32px; left: 50%;" alt="logo" class="position-absolute"></a>
+    <!-- absolute header circles -->
+
+    <a class="navbar-brand bg-transparent"><img src="{{logo}}" alt="logo" style="width:auto;height: 60px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto f-16">
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="app.dashboard"> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="app.gurddashboard">
+            Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="app.reporting"> Reporting</a>
+        </li>
+        <li class="nav-item dropdown cursor-pointer">
+          <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+            Configuration Manager
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-submenu">
+              <a tabindex="-1" class="dropdown-toggle" data-toggle="dropdown" role="button">Facility
+                Configuration<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" ui-sref="app.plantconfig">Facility</a></li>
+                <li><a class="dropdown-item" ui-sref="app.floorconfig">Floor</a></li>
+                <li><a class="dropdown-item" ui-sref="app.zoneconfig">Zone</a></li>
+              </ul>
+            </li>
+            <li> <a class="dropdown-item" ui-sref="app.deviceconfig">Device Configuration</a></li>
+            <li> <a class="dropdown-item" ui-sref="app.netconfig">Mesh Network Configuration</a></li>
+            <li class="dropdown-submenu">
+              <a tabindex="-1" class="dropdown-toggle" data-toggle="dropdown" role="button"><span
+                  class="nav-label">Asset Configuration</span><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" ui-sref="app.assettypeconfig">Asset Class</a></li>
+                <li><a class="dropdown-item" ui-sref="app.subtypeconfig">Asset Sub-class</a></li>
+                <li><a class="dropdown-item" ui-sref="app.employeeconfig">Add Asset</a></li>
+              </ul>
+            </li>
+            <!-- <li><a class="dropdown-item" href="/#/app/busconfig">Bus Configuration</a> </li>
+            <li><a class="dropdown-item" href="/#/app/foodcartconfig">FoodCart Configuration</a> </li> -->
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown cursor-pointer">
+          <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Mapping</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" ui-sref="app.assetzonemapping">Asset & Zone</a></li>
+            <li><a class="dropdown-item" ui-sref="app.rulesetup">Rule Setting</a></li>
+            <li><a class="dropdown-item" ui-sref="app.deviceAndAssetProvi">Map Device with Asset</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="app.floorlayout">
+            Floor Layout</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/#/app/heat-map">
+            Heat Map</a>
+        </li> -->
+        <li class="nav-item dropdown cursor-pointer">
+          <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+            Status
+          </a>
+          <ul class="dropdown-menu">
+            <li> <a class="dropdown-item" ui-sref="app.beaconbatteryStatus">Beacon Battery Status</a></li>
+            <li><a class="dropdown-item" ui-sref="app.healthManagement">Health Management</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <form name="searchAsset" novalidate>
+            <div class="asset-search">
+              <input type="text" autocomplete="off" class="text" name="searchAssetName"
+                ng-model="search.searchAssetName" placeholder="Search online asset" minlength='2' ng-trim="true"
+                ng-keyup="searchOnlineAsset(search.searchAssetName)">
+              <button class="iconfont icon_search" id="blog-search-submit"
+                ng-click="searchOnlineAsset(search.searchAssetName)" hide-login="hideLoginContainer()"><i
+                  class="fa fa-search" aria-hidden="true"></i></button>
+              <ul class="searchAssetList" ng-show="showAssetList">
+                <li ng-repeat="asset in assetList" ng-click="getOnlineAssetDetails(event, asset)">
+                  <a>{{asset.empName}}</a>
+                </li>
+                <li ng-if="assetList.length == 0"><a>Search asset is not online</a></li>
+              </ul>
+            </div>
+          </form>
+          <!-- Search Asset -->
+
+        </li>
+        <li class="displayChatbox nav-item">
+          <div class="nav-bell" ng-click="openMe()">
+            <div class="notification">{{notificationList.length}}</div>
+            <i class="fa fa-bell"> </i>
+          </div>
+        </li>
+
+        <li class="nav-item" ng-click="logout()">
+          <div class="nav-bell">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+        </li>
+
+        <!-- <li class="nav-item">
+          <a href="#" class="nav-link" ng-click="openLogin()" hide-login="hideLoginContainer()">Login</a>
+          <div class="loginBox" ng-show="userLogin">
+            User Login
+          </div>
+        </li> -->
+
+      </ul>
+    </div>
+  </nav>
+  <!-- Side Bar -->
+  <div>
+    <section class="{{cls}}">
+      <div class="h-list-header">
+        <div class="input-group">
+
+          <input type="text" id="search-friends" class="form-control" placeholder="Search Asset . . .">
+        </div>
+      </div>
+      <div class="h-list-body">
+        <a class="cursor-pointer h-close-text" ng-click="openMe()"><i class="fa fa-times "
+            style="color:#ff000094;"></i></a>
+        <div class="main-friend-cont scroll-div customScroll" ng-if="notificationList.length > 0">
+          <div class="main-friend-list">
+            <div class="media userlist-box" ng-repeat="notification in notificationList">
+              <a class="media-left" href="#!"><img class="media-object img-radius" src="../images/user/avatar-1.jpg"
+                  alt="Generic placeholder image ">
+              </a>
+              <div class="media-body">
+                <h3 class="chat-header">Asset Name: {{notification.empName}} <h6><small
+                      class="d-block text-muted">{{notification.fromnow}} </small></h6>
+                </h3>
+                </br>
+                <h6><small class="d-block text-muted">Zone Name: {{notification.zoneName}} </small></h6>
+                <h6><small class="d-block text-muted">Entry: {{notification.entryTime}} </small></h6>
+                <h6><small class="d-block text-muted">Exit: {{notification.exitTime}} </small></h6>
+                <h6><small class="d-block text-muted">Message: {{notification.message}} </small></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main-friend-cont text-center" ng-if="notificationList.length == 0">
+          <h6 class="chat-header">No events</h6>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>

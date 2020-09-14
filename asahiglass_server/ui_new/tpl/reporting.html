@@ -1,0 +1,327 @@
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+        font-size: 15px;
+    }
+</style>
+<toaster-container></toaster-container>
+<div ng-if="loading" class="loading"><img src="../images/Spinner.gif" class="mx-auto d-block"></div>
+<!-- [ breadcrumb ] end -->
+<div class="container mt-5">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <!-- [ Main Content ] start -->
+            <div class="row">
+                <form name="reportingForm" novalidate>
+                    <div class="card select-card">
+                        <div class="card-header bg-dark">
+                            <h5 class="text-white">Reporting</h5>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="plant">Select Facility
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field.">
+                                        </i>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!plant">*</span>
+                                    </label>
+                                    <select class="form-control" ng-model="plant">
+                                        <option value="">Select Facility</option>
+                                        <option ng-repeat="plant in plantList" value="{{plant.id}}">
+                                            {{plant.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="assetType">KPI Types
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field.">
+                                        </i>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!kpiType">*</span>
+                                    </label>
+                                    <select class="form-control" ng-model="kpiType" ng-change="getKPIList(kpiType)">
+                                        <option value="">Select KPI Type</option>
+                                        <option value="1">Zone KPI</option>
+                                        <option value="2">Asset KPI</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3" ng-show="kpiListArray.length">
+                                    <label for="assetType">KPI Names
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field.">
+                                        </i>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!kpi.length">*</span>
+                                    </label>
+                                    <select style="width:100% !important;" class="js-example-basic-multiple col-sm-12"
+                                        ng-model="kpi" id="kpi" name="kpi" multiple="multiple">
+                                        <option ng-repeat="kpi in kpiListArray" value={{kpi.kpiId}}>
+                                            {{kpi.kpiName}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="assetType">Select Asset Class
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field."></i>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!assetType">*</span></label>
+
+                                    <select class="js-example-placeholder-multiple col-sm-12" ng-model="assetType"
+                                        ng-change="getSubTypeList(assetType)">
+                                        <option value="">Select Asset Class</option>
+                                        <option ng-repeat="asset in assetTypeListArray" value={{asset.id}}>
+                                            {{asset.name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3" ng-if="subTypeArray.length">
+                                    <label for="subType">Select Asset Sub-class
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field."></i></label>
+                                    </label>
+                                    <select style="width:100% !important;"
+                                        class="form-control js-example-placeholder-multiple col-sm-12"
+                                        ng-model="subType">
+                                        <option value="">Select Asset Sub-class</option>
+                                        <option ng-repeat="subType in subTypeArray" value={{subType.id}}>
+                                            {{subType.name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="specificAsset">Specific Asset/Employee
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field."></i>
+                                    </label>
+                                    <input type="text" ng-model="specificAsset" class="form-control"
+                                        name="specificAsset" ng-pattern="/^[a-zA-Z0-9]+$/"
+                                        placeholder="Enter Asset/Employee Id">
+                                    <span
+                                        ng-show="reportingForm.specificAsset.$invalid && reportingForm.specificAsset.$touched"
+                                        class="form-text text-danger">Invalid
+                                        Asset/Employee</span>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="zone">Select Zone
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field.">
+                                        </i>
+                                    </label>
+                                    <select class="form-control js-example-placeholder-multiple col-sm-12"
+                                        ng-model="zone">
+                                        <option ng-repeat="zone in zoneListArray" value={{zone.id}}>
+                                            {{zone.name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="assetType">Select Filter
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field.">
+                                        </i>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!filter">*</span>
+                                    </label>
+                                    <select class="form-control" ng-model="filter" ng-change="resetDates(filter)">
+                                        <option value="">Select Report Filter</option>
+                                        <option value="1">Daily</option>
+                                        <option value="2">Weekly</option>
+                                        <option value="3">Monthly</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="pwd">Start Date
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!startDate">*</span>
+                                    </label>
+                                    <input placeholder="Start Date" class="form-control" datetime-picker
+                                        ng-model="startDate" close-on-select="false" />
+                                </div>
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="pwd">End Date
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!endDate">*</span>
+                                    </label>
+                                    <input placeholder="End Date" class="form-control" datetime-picker
+                                        ng-model="endDate" close-on-select="false">
+                                </div>
+
+                                <!-- <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="shiftTime">Enter Shift Duration
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!shiftTime">*</span>
+                                    </label>
+                                    <input type="number" ng-model="shiftTime" class="form-control" min="1" max="24"
+                                        ng-pattern="/^[0-9]+$/" ng-maxlength="2" name="shiftTime" data-toggle="tooltip"
+                                        data-placement="left" title="Range 1-24" placeholder="Enter Shift Duration"
+                                        required>
+                                    <span ng-show="reportingForm.shiftTime.$invalid && reportingForm.shiftTime.$touched"
+                                        class="form-text text-danger">Invalid Shift Duration value,Please enter value
+                                        between 1 to 24</span>
+                                </div> -->
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <label for="assetType">Select Reporting Type
+                                        <i class="feather icon-info"
+                                            title="Hi there! This is for showing information about this field.">
+                                        </i>
+                                        <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                            ng-show="!reportType">*</span>
+                                    </label>
+                                    <select class="form-control" ng-model="reportType">
+                                        <option value="">Select Reporting Type</option>
+                                        <option value="1">Table</option>
+                                        <option value="2">Pie Chart</option>
+                                        <option value="3">Bar Chart</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-12 col-md-12 mb-4">
+                                    <div class="float-right">
+                                        <button class="btn btn-warning text-dark"
+                                            ng-disabled="!kpiType || !kpi.length || !assetType || !plant || !startDate || !endDate || !filter || !reportType"
+                                            ng-click="viewReport(reportType)">View Report</button>
+                                        <button id="exportReport" class="btn btn-secondary"
+                                            ng-disabled="!kpiType || !kpi.length || !assetType || !plant || !startDate || !endDate || !filter || !reportType"
+                                            ng-click="exportAllData()">Export</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row" ng-if="reportFormat">
+            <div class="col-sm-12 px-0">
+                <div class="card select-card">
+                    <div class="card-header bg-dark">
+                        <h5 class="text-white">Reporting</h5>
+                    </div>
+                    <div class="card-block">
+                        <div class="row" ng-if="reportFormat=='1'">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-block coustomBlock" style="overflow:auto">
+                                        <table id="example" class="display table nowrap table-striped table-hover"
+                                            width="100%">
+                                            <thead></thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="reportFormat=='2'">
+                            <!-- [ Amchart 4 chart ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div ng-show="showErrorPie" style="text-align: center;">
+                                            <span style="color:red; text-align:center">No record found
+                                                for selected KPI.</span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <hr>
+                                                <div id="chartdiv"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Amchart 4 chart ] End -->
+                        </div>
+                        <div class="row" ng-if="reportFormat=='3'">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div ng-if="showErrorBar" style="text-align: center;">
+                                            <span style="color:red; text-align:center">No record found
+                                                for selected KPI.</span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <hr>
+                                                <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Amchart 4 chart ] End -->
+                        </div>
+                        <div class="row" ng-if="showChartDetailedData">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-block coustomBlock" style="overflow:auto">
+                                        <table id="example" class="display table nowrap table-striped table-hover"
+                                            width="100%">
+                                            <thead></thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="reportingModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header"><b>Detail View</b>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" style="overflow:auto">
+                        <table id="ViewDetail" class="display table nowrap table-striped table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Zone Name</th>
+                                    <th>Asset Id</th>
+                                    <th>Asset Name</th>
+                                    <th>Violation</th>
+                                    <th>Entry Time</th>
+                                    <th>Exit Time</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- </div> -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Close</button>
+                        <!-- <a href="#" class="btn float-right btn-success" id="ViewDetailExport">Export
+                            Data</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+</div>
+
+<!-- form-select-custom Js -->
+<script src="../vendor/select2/js/select2.full.min.js"></script>
+<!-- form-select-custom Js -->
+<script src="../js/form-select-custom.js"></script>
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>

@@ -1,0 +1,191 @@
+
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+
+<toaster-container></toaster-container>
+<!-- Banner Part starts -->
+<div class="bg-statement pb-3">
+    <div class="container">
+        <div class="pt-3 pb-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="../images/bus.svg" class="zoom d-block mx-auto" alt="" />
+                </div>
+                <div class="col-md-10">
+                    <h2 class="text-dark mt-2 font-bold">Company Configuration</h2>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+        <div class="mt-5">
+                <div class="card" >
+                    <div class="card-header bg-dark">
+                        <h5 class="text-white">Company Configuration</h5>
+                    </div>
+                    <div class="card-block">
+                            <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label for="name">Company Name
+                                            <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                ng-show="!name">*</span></label>
+                                        <input name="name" ng-model="name" type="text" class="form-control"
+                                            placeholder="Enter company name">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="address">Company Address
+                                            <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                ng-show="!address">*</span></label>
+                                        <input name="address" ng-model="address" type="text" class="form-control"
+                                            placeholder="Enter address">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                            <label for="address">Company Web Link
+                                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                    ng-show="!webLink">*</span></label>
+                                            <input name="webLink" ng-model="webLink" type="text" class="form-control"
+                                                placeholder="Enter webLink">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                            <label for="address">Company Logo
+                                                
+                                                    <input type="file" ng-model="file" class="form-control" name="file" base-sixty-four-input required onload="onLoad" maxsize="500" accept="image/*">
+                                    </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label for="name">Admin Name
+                                            <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                ng-show="!uFullName">*</span></label>
+                                        <input name="uFullName" ng-model="uFullName" type="text" class="form-control"
+                                            placeholder="Enter admin name">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="address">Admin Contact No.
+                                            <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                ng-show="!contact">*</span></label>
+                                        <input name="contact" ng-model="contact" type="text" class="form-control"
+                                            placeholder="Enter contact">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                            <label for="address">Admin Email
+                                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                    ng-show="!uEmail">*</span></label>
+                                            <input name="uEmail" ng-model="uEmail" type="text" class="form-control"
+                                                placeholder="Enter admin email">
+                                    </div>
+
+                                    <div class="col-md-3 form-group">
+                                            <label for="address">Password
+                                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                    ng-show="!uPassword">*</span></label>
+                                            <input name="uPassword" ng-model="uPassword" type="password" class="form-control"
+                                                placeholder="Enter admin password">
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                            <label for="address">Admin Address
+                                                <span class="ng-invalid" style="color:red; font-weight:bold;"
+                                                    ng-show="!uAddress">*</span></label>
+                                             <textarea name="uAddress" ng-model="uAddress" class="form-control"></textarea>       
+                                           
+                                    </div>
+                                    <div class="col-md-2 form-group">
+                                    </br>
+                                    </br>
+                                            <button class="btn btn-primary" ng-disabled="!uAddress ||!uPassword || !uEmail || !contact || !uFullName  || !webLink || !address || !name" ng-click="addCompany()"  >Save</button>
+                                    </div>
+                                   
+                 
+                            </div>
+
+                            
+                    </div>
+                    
+                </div>
+
+            </div>
+
+    <!--code for modal window starts-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Update Bus
+                            Configuration</b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to update this data ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" ng-click="addUpdateBus()" class="btn btn-primary" data-dismiss="modal">Yes,
+                        Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--code for modal window ends-->
+
+    <div class="mt-5">
+        <div class="card" ng-show="showTable == true">
+            <div class="card-header bg-dark">
+                <h5 class="text-white">Company List</h5>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table id="companyList" class="display table nowrap table-striped table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Company Address</th>
+                                <th>Company Website</th>
+                                <th>Company Logo</th>
+                                <th>Admin Name</th>
+                                <th>Admin Email</th>
+                                <th>Admin Contact</th>
+                                <th>Admin Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card" ng-show="showTable == false">
+            <div class="card-header bg-dark">
+                <h5 class="text-white">Company List</h5>
+            </div>
+            <div class="card-block">
+                <div class="c-wrap mx-2">
+                    <i class="feather icon-file-text mx-auto d-block text-center text-dark" style="font-size: 36px;"
+                        aria-hidden="true"> </i>
+                    <p class="text-center text-dark" style="margin: 10px 0px;">No records Found!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Banner Part End -->
+<script>
+    $(document).ready(function () {
+        $('.upload-form input').change(function () {
+            $('.upload-form p').text(this.files.length + " file(s) selected");
+        });
+    });
+</script>
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>

@@ -1,0 +1,254 @@
+<style>
+/* Latest compiled and minified CSS included as External Resource*/
+
+/* Optional theme */
+
+
+.stepwizard-step p {
+    margin-top: 0px;
+    color:#666;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    /*opacity: 1 !important;
+    filter: alpha(opacity=100) !important;*/
+}
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+    opacity:1 !important;
+    color:#bbb;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content:" ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-index: 0;
+    left: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+</style>
+<script>
+$(document).ready(function () {
+
+var navListItems = $('div.setup-panel div a'),
+    allWells = $('.setup-content'),
+    allNextBtn = $('.nextBtn');
+
+allWells.hide();
+
+navListItems.click(function (e) {
+    e.preventDefault();
+    var $target = $($(this).attr('href')),
+        $item = $(this);
+
+    if (!$item.hasClass('disabled')) {
+        navListItems.removeClass('btn-danger').addClass('btn-success');
+        $item.addClass('btn-success');
+        allWells.hide();
+        $target.show();
+        $target.find('input:eq(0)').focus();
+    }
+});
+
+allNextBtn.click(function () {
+    var curStep = $(this).closest(".setup-content"),
+        curStepBtn = curStep.attr("id"),
+        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+        curInputs = curStep.find("input[type='text'],input[type='url']"),
+        isValid = true;
+
+    $(".form-group").removeClass("has-error");
+    for (var i = 0; i < curInputs.length; i++) {
+        if (!curInputs[i].validity.valid) {
+            isValid = false;
+            $(curInputs[i]).closest(".form-group").addClass("has-error");
+        }
+    }
+
+    if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+});
+
+$('div.setup-panel div a.btn-success').trigger('click');
+});
+</script>
+   <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <!-- [ breadcrumb ] start -->
+                        
+                        <!-- [ breadcrumb ] end -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- [ Main Content ] start -->
+                                <div class="row">
+
+                                        <div class="col-sm-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Company Details</h5>
+                                                    </div>
+                                                    <div class="card-block">
+                                                            <div class="container">
+                                                                    <div class="stepwizard">
+                                                                        <div class="stepwizard-row setup-panel">
+                                                                            <div class="stepwizard-step col-xs-3"> 
+                                                                                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                                                                                <p><small>Company Info</small></p>
+                                                                            </div>
+                                                                           
+                                                                            <div class="stepwizard-step col-xs-3"> 
+                                                                                <a href="#step-4" type="button" class="btn btn-danger btn-circle" disabled="disabled">2</a>
+                                                                                <p><small>User Info</small></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <form role="form">
+                                                                        <div class="panel panel-primary setup-content" id="step-1">
+                                                                            
+                                                                            <div class="panel-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6">
+                                                                                            <div class="form-group">
+                                                                                                    <label for="pwd">Company Name</label>
+                                                                                                    <input ng-model="name" type="text"  class="form-control" placeholder="Company name..." >
+                                                                                            
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6">
+                                                                                            <div class="form-group">
+                                                                                                    <label for="pwd">Address</label>
+                                                                                                    <input ng-model="address" type="text"  class="form-control" placeholder="Company full address..." >
+                                                                                            
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6">
+                                                                                            <div class="form-group">
+                                                                                                    <label for="pwd">Company Web Link</label>
+                                                                                                    <input  ng-model="webLink" type="text" class="form-control" placeholder="Company webLink..." >
+                                                                                            
+                                                                                            </div>
+                                                                                    </div>   
+                                                                                    <div class="col-lg-6">
+                                                                                            <div class="form-group">
+                                                                                                    <label for="pwd">Company logo</label>
+                                                                                                    <input type="file" ng-model="file" class="form-control" name="file" base-sixty-four-input required onload="onLoad" maxsize="500" accept="image/*">
+                                                                                            </div>
+                                                                                            
+                                                                                    </div>  
+                                                                               
+                                                                                </div>
+                                                                                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        
+                                                                        <div class="panel panel-primary setup-content" id="step-4">
+                                                                                <div class="panel-body">
+                                                                                        <div class="row">
+                                                                                            <div class="col-lg-4">
+                                                                                                    <div class="form-group">
+                                                                                                            <label for="pwd">Full Name</label>
+                                                                                                            <input ng-model="uFullName" type="text" class="form-control" placeholder="Full name..." >
+                                                                                                    
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                    <div class="form-group">
+                                                                                                            <label for="pwd">email</label>
+                                                                                                            <input ng-model="uEmail" type="email" class="form-control" placeholder="Email Id..." >
+                                                                                                    
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                    <div class="form-group">
+                                                                                                            <label for="pwd">Password</label>
+                                                                                                            <input ng-model="uPassword" type="password" class="form-control" placeholder="Password" >
+                                                                                                    
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                    <div class="form-group">
+                                                                                                            <label for="pwd">Contact No.</label>
+                                                                                                            <input ng-model="contact" type="text" class="form-control" placeholder="Contact No." >
+                                                                                                    
+                                                                                                    </div>
+                                                                                            </div>   
+                                                                                            <div class="col-lg-4">
+                                                                                                    <div class="form-group">
+                                                                                                            <label for="pwd">User Type</label>
+                                                                                                            <select  ng-model="type" class="form-control" id="sel1" name="sellist1">
+                                                                                                                    <option value="">Select User Type</option>
+                                                                                                                    <option value="1" selected="selected">Company Admin</option>
+                                                                                                               
+                                                                                                            </select>
+                                                                                                    
+                                                                                                    </div>
+                                                                                            </div>  
+                                                                                            <div class="col-lg-4">
+                                                                                                    <div class="form-group">
+                                                                                                            <label for="pwd">Address</label>
+                                                                                                            <input ng-model="uAddress" type="text" class="form-control" placeholder="Full address..." >
+                                                                                                    
+                                                                                                    </div>
+                                                                                            </div>                                                                                 
+                                                                                        </div>
+                                                                                        <button class="btn btn-primary nextBtn pull-right" ng-click="addCompany()" type="button">Save</button>
+                                                                                    </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Company List</h5>
+                                                        
+                                                    </div>
+                                                    <div class="card-block coustomBlock">
+                                                    
+                                                    </div>
+        
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+    
+                                    
+                </div>
+            </div>
+        </section>
+        <!-- [ Main Content ] end -->
+    

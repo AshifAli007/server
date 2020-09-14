@@ -1,0 +1,39 @@
+<!-- BEGIN SIDEBAR -->
+<!-- <div ng-include src=" 'tpl/blocks/sidebar.html' " include-replace>
+</div> -->
+<!-- END SIDEBAR -->
+<!-- START PAGE-CONTAINER -->
+<div class="page-container">
+    <!-- START PAGE HEADER WRAPPER -->
+    <div ng-hide="isPrivlage === 'true'" ng-include src=" './tpl/blocks/nav.html' "></div>
+    <div ng-show="isPrivlage === 'true'" ng-include src=" './tpl/blocks/nav.admin.html' "></div>
+    <!-- <div ng-hide="is('app.calendar')" ng-include=" 'tpl/blocks/header.html' ">
+    </div> -->
+    <!-- END PAGE HEADER WRAPPER -->
+    <!-- <div ng-if="is('app.calendar')" ng-include=" 'tpl/apps/calendar/mobile_controls.html' ">
+    </div> -->
+    <!-- START PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrapper">
+        <!-- START PAGE CONTENT -->
+        <div class="content">
+            <div class="full-height full-width" ui-view>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT -->
+        <!-- <div ng-if="!(includes('app.email') || includes('app.calendar') || includes('app.social') || includes('app.layouts') )" ng-include=" 'tpl/blocks/footer.html'">
+        </div> -->
+    </div>
+    <!-- END PAGE CONTENT WRAPPER -->
+    <!-- <div class="full-height" ng-if="is('app.builder')" ng-include=" 'tpl/blocks/builder_content.html' "></div>-->
+</div>
+<!-- END PAGE CONTAINER -->
+
+
+<!-- <div ng-if="includes('app.builder')" ng-include=" 'tpl/blocks/builder_options.html'">
+</div> -->
+
+
+<!-- START MODALS -->
+<!-- <div ng-if="includes('app.ui.modals')" ng-include src=" 'tpl/blocks/modals.html' " include-replace>
+</div> -->
+<!-- END MODALS -->

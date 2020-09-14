@@ -1,0 +1,340 @@
+<toaster-container></toaster-container>
+<!-- data tables css -->
+<link rel="stylesheet" href="../vendor/data-tables/css/datatables.min.css">
+<style>
+    .showPieChartErrorImage {
+        width: 250px;
+        height: auto;
+        text-align: center;
+    }
+
+    .showPieChartErrorImage img {
+        height: 150px;
+        width: 150px;
+    }
+
+    @-webkit-keyframes fadeOut {
+        0% {
+            box-shadow: 0px 0px 20px rgba(255, 82, 82, 0.98);
+        }
+
+        100% {
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            box-shadow: 0px 0px 20px rgba(255, 82, 82, 0.98);
+        }
+
+        100% {
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+
+    .notAllowedUser {
+        box-shadow: 0px 0px 20px rgba(255, 82, 82, 0.98);
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+        -webkit-animation-duration: 30s;
+        animation-duration: 30s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+    }
+
+    nav {
+        border-radius: .25rem;
+    }
+
+    .assetSelectDiv {
+        display: inline-flex;
+        float: right;
+    }
+
+    .assetSelectDiv span {
+        color: #fff;
+        margin-right: 14px;
+    }
+
+    .assetSelectDiv select {
+        font-weight: 400;
+        color: #495057;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        background: #f4f7fa;
+        padding: 0px -11px;
+        font-size: 14px;
+    }
+
+    nav>ol {
+        margin: 0 !important;
+    }
+</style>
+<!-- Navbar ends -->
+<div ng-if="spinner" class="loading"><img src="../images/Spinner.gif" class="mx-auto d-block"></div>
+<div class="container" ng-init="loadData()" class="mt-4" ng-cloak>
+    <div class="row mt-4">
+        <div class="col-lg-3" id="menu2">
+            <div class="bg-white pt-4 border border-1 border-top-0 border-left-0 border-bottom-0"
+                style="border-radius: 5px; box-shadow: 0px 2px 12px #00000021;">
+                <p class="text-dark f-w-600  pl-4">Useful Links</p>
+                <hr />
+                <p class=" pl-4">
+                    <a ui-sref="app.gurddashboard" class="text-muted"> <i class="fas fa-chart-pie"> </i> Stats
+                        Dashboard
+                    </a>
+                </p>
+                <p class=" pl-4">
+                    <a ui-sref="app.realtimeevents" class="text-muted"> <i class="far fa-clock"> </i> Monitor Entry
+                        &
+                        Exit
+                    </a>
+                </p>
+                <p class=" pl-4  pb-4 ">
+                    <a ui-sref="app.reporting" class="text-muted"> <i class="far fa-chart-bar"> </i> Reporting</a>
+                </p>
+            </div>
+
+            <div class="bg-white mt-4 border border-1 border-top-0 border-left-0 border-bottom-0"
+                style="border-radius: 5px; box-shadow: 0px 2px 12px #00000021;">
+                <div class="col-lg-12">
+                    <div id="device-chart" ng-show="!showPieChartErrorImage" class="device-chart"
+                        style="width: 250px; height: 250px; overflow: hidden; text-align: left;">
+                    </div>
+                    <div class="showPieChartErrorImage" ng-show="showPieChartErrorImage">
+                        <img src="../images/pieChartErrorImage.png" style="height: 150px; width:150px; margin:auto;">
+                    </div>
+                </div>
+                <div class="">
+                    <div class="col-sm-12 pt-3 pb-3 border-top">
+                        <span class="mr-3"><i class="feather icon-circle text-c-green  mr-2"></i>Total Asset</span>
+                        <span class="float-right">{{totalUserDetail.allUser}}</span>
+                    </div>
+                    <div class="col-sm-12 pt-3 pb-3 border-top">
+                        <span class="mr-3"><i class="feather icon-circle text-c-green  mr-2"></i>Online Asset</span>
+                        <span class="float-right">{{totalUserDetail.totalUser}}</span>
+                    </div>
+                    <div class="col-sm-12 pt-3 pb-3 border-top">
+                        <span class="mr-3"><i class="feather icon-circle text-c-blue  mr-2"></i>Allowed User</span>
+                        <span class="float-right">{{totalUserDetail.allowedUser}}</span>
+                    </div>
+                    <div class="col-sm-12 pb-3 pt-3 border-top">
+                        <span class="mr-3"><i class="feather icon-circle text-c-purple  mr-2"></i>Not Allowed
+                            User</span>
+                        <span class="float-right">{{totalUserDetail.notAllowedUser}}</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="bg-white pt-4 mt-4 border border-1 border-top-0 border-left-0 border-bottom-0"
+                style="border-radius: 5px; box-shadow: 0px 2px 12px #00000021;">
+                <p class="text-dark f-w-600  pl-4">Configuration Links</p>
+                <hr />
+                <p class="pl-4"> <a ui-sref="app.plantconfig" class="text-muted"><i class="fa fa-industry"></i>
+                        Facility
+                        Configuration </a> </p>
+                <p class="pl-4 "> <a ui-sref="app.floorconfig" class="text-muted"><i class="fa fa-layer-group"></i>
+                        Floor
+                        Configuration </a></p>
+                <p class="pl-4 pb-4"><a ui-sref="app.zoneconfig" class="text-muted"><i class="fas fa-warehouse"></i>
+                        Zone
+                        Configuration </a></p>
+            </div>
+        </div>
+        <div class="col-lg-9 pl-3" id="menu1">
+            <nav aria-label="breadcrumb" class="bg-dark">
+                <ol class="breadcrumb" style="display: inline-flex;">
+                    <li class="breadcrumb-item cursor-pointer"
+                        ng-if="(selectedTab === 'zonePanel' || selectedTab === 'singleZonePanel' || selectedTab === 'floorPanel' || selectedTab === 'plantPanel')"
+                        ng-class="{active : selectedTab === 'plantPanel'}" ng-click="showTab('plantPanel')">
+                        <a>Facility</a>
+                    </li>
+                    <li class="breadcrumb-item cursor-pointer" ng-class="{active : selectedTab === 'floorPanel'}"
+                        ng-if="(selectedTab === 'zonePanel' || selectedTab === 'singleZonePanel' || selectedTab === 'floorPanel')"
+                        ng-click="showTab('floorPanel')">
+                        <a>{{plantName}}</a>
+                    </li>
+                    <li class="breadcrumb-item cursor-pointer" ng-class="{active : selectedTab === 'zonePanel'}"
+                        ng-if="(selectedTab === 'zonePanel' || selectedTab === 'singleZonePanel')"
+                        ng-click="showTab('zonePanel')">
+                        <a>{{floorName}}</a>
+                    </li>
+                    <li class="breadcrumb-item cursor-pointer" ng-class="{active : selectedTab === 'singleZonePanel' }"
+                        ng-if="selectedTab === 'singleZonePanel'">
+                        <a>{{zoneDetail.name}}</a>
+                    </li>
+                </ol>
+                <ol class="breadcrumb assetSelectDiv">
+                    <span style="color: #fff;margin-right: 14px;">Select Asset Class</span>
+                    <select ng-model="assetType" ng-change="getAssetFilterData(assetType)">
+                        <option value="">Select Asset Class</option>
+                        <option ng-repeat="asset in assetTypeList" value={{asset.id}}>
+                            {{asset.name}}
+                        </option>
+                    </select>
+                </ol>
+            </nav>
+            <div ng-switch on="selectedTab">
+                <!-- Plant Cards -->
+                <div ng-switch-when="plantPanel" class="row mt-4">
+                    <div class="col-lg-4" ng-repeat="plant in plants" ng-click="getFloorDetails(plant)">
+                        <div class="card cursor-pointer">
+                            <div class="card-block">
+                                <h5 class="text-center">{{plant.name}}</h5>
+                                <center><span>{{plant.plantTypeName}}</span></center>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-auto">
+                                        <h3 class="f-w-300 m-t-20">{{plant.plantVoilation}}<i
+                                                class="fas fa-caret-down status_down f-26 m-l-10"></i></h3>
+                                        <span>Violation</span>
+                                    </div>
+                                    <div class="col text-right">
+                                        <i class="fas fa-chart-pie f-30 text-theme"></i>
+                                    </div>
+                                </div>
+                                <div class="leads-progress mt-3">
+                                    <!-- <h6 class="mb-3 text-center">Organic</h6> -->
+                                    <div class="progress">
+                                        <div class="progress-bar progress-c-theme" role="progressbar"
+                                            style="width: 36%; height:10px;" aria-valuenow="35" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <h6 class="text-muted f-w-300 mt-4">Floor <span
+                                            class="float-right">{{plant.floorCount}}</span></h6>
+                                    <h6 class="text-muted f-w-300 mt-4">Zones <span
+                                            class="float-right">{{plant.zoneCount}}</span></h6>
+                                    <h6 class="text-muted f-w-300 mt-4">Assets <span
+                                            class="float-right">{{plant.assetCount}}</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floor Cards -->
+                <div ng-switch-when="floorPanel" class="row mt-4">
+                    <div class="col-lg-4" ng-repeat="floor in floorsData" ng-click="getZoneDetails(floor)">
+                        <div class="card cursor-pointer">
+                            <div class="card-block">
+                                <h5 class="text-center">{{floor.name}}</h5>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-auto">
+                                        <h3 class="f-w-300 m-t-20">{{floor.floorVoilation}}<i
+                                                class="fas fa-caret-down status_down f-26 m-l-10"></i></h3>
+                                        <span>Voilation</span>
+                                    </div>
+                                    <div class="col text-right">
+                                        <i class="fas fa-chart-pie f-30 text-theme"></i>
+                                    </div>
+                                </div>
+                                <div class="leads-progress mt-3">
+                                    <!-- <h6 class="mb-3 text-center">Organic</h6> -->
+                                    <div class="progress">
+                                        <div class="progress-bar progress-c-theme" role="progressbar"
+                                            style="width: 36%; height:10px;" aria-valuenow="35" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <h6 class="text-muted f-w-300 mt-4">Zones <span
+                                            class="float-right">{{floor.zoneCount}}</span></h6>
+                                    <h6 class="text-muted f-w-300 mt-4">Assets <span
+                                            class="float-right">{{floor.assetCount}}</span></h6>
+                                    <!-- <h6 class="text-muted f-w-300 mt-4">Floors <span class="float-right">120</span></h6> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zones Cards -->
+                <div ng-switch-when="zonePanel" class="row mt-4">
+                    <div class="col-lg-4" ng-repeat="controlRoom in controlRoomList"
+                        ng-click="getSingleZoneData(controlRoom.id)">
+                        <div class="card cursor-pointer Active-visitor"
+                            ng-class="{notAllowedUser : controlRoom.notallowedUsers > 0}">
+                            <div class="card-block">
+                                <div class="dash-space text-center">
+                                    <h4 class="mb-3 f-w-600">{{controlRoom.name}}</h4>
+                                    <i class="fab fa-angellist f-30 title-zone"></i>
+                                    <h2 class="f-w-300 mt-1">{{controlRoom.activeUser}}</h2>
+                                    <span class="text-muted">Assets Present</span>
+                                    <div class="progress mt-4 m-b-30">
+                                        <div class="progress-bar progress-c-theme" role="progressbar"
+                                            style="width: 100%; height:7px;" aria-valuenow="75" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row card-active">
+                                        <div class="col-md-4 col-6">
+                                            <h4>{{controlRoom.allowedUsers}}</h4>
+                                            <span class="">Allowed</span>
+                                        </div>
+                                        <div class="col-md-4 col-6">
+                                            <h4>{{controlRoom.notallowedUsers}}</h4>
+                                            <span class="">Not Allowed</span>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <h4>{{controlRoom.voilation24hr}}</h4>
+                                            <span class="">Violation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch-when="singleZonePanel" class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="card cursor-pointer Active-visitor">
+                            <div class="card-block">
+                                <div class="dash-space">
+                                    <!-- <img src="../images/Conference_Room.png"  style="width:100%;" > -->
+                                    <img src="{{zoneDetail.zone_image}}" style="width:100%;">
+                                    <div class="custom-relative position-absolute" ng-repeat="asset in assetData">
+                                        <i ng-style="asset.clr" class="{{asset.icon}} text-left"
+                                            ng-click="openTost(asset.id)"></i>
+                                        <div id="{{asset.id}}" role="alert"
+                                            style="min-width:250px;left:0px; top:40px; display:none; background-color: #EFF0F1"
+                                            aria-live="assertive" data-delay="15000" aria-atomic="true">
+                                            <div class="toast-header">
+                                                <img ng-src="{{asset.assetImg}}" width="40" alt=""
+                                                    class="img-fluid mr-2">
+                                                <strong class="mr-auto">{{asset.assetName}}</strong>
+
+                                                <small class="text-muted">{{asset.fromnow}}</small>
+                                                <button type="button" class="ml-2 mb-1 close"
+                                                    ng-click="CloseToast(asset.id)" data-dismiss="toast"
+                                                    aria-label="Close">
+                                                    <span>&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                <strong class="mr-auto">Asset Class: </strong>{{asset.assetType}}
+                                                </br>
+                                                <strong class="mr-auto">Asset Sub-class: </strong>{{asset.subType}}
+                                                <div>Message: {{asset.message}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- datatable Js -->
+<script src="../vendor/data-tables/js/datatables.min.js"></script>
+<script src="../js/tbl-datatable-custom.js"></script>
+<!-- Banner Part End -->

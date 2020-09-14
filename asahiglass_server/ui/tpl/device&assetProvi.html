@@ -1,0 +1,251 @@
+   <style>
+   .material-icons {
+  vertical-align: middle;
+  line-height: 0;
+  margin-top: -5px;
+}
+
+/*
+ * Tabs
+ */
+
+.tabs {
+    padding: 0;
+}
+
+.tabs .tab-input {
+    display: none;
+}
+
+.tabs .tab-label {
+    color: #ddd;
+    cursor: pointer;
+    float: left;
+    padding: 7px;
+    text-align: center;
+}
+
+.tabs-full .tab-label {
+    display: table-cell;
+    float: none;
+    width: 1%;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.tabs .tab-label:hover {
+    color: #333;
+}
+.dataTables_filter { visibility: hidden;}
+.tabs .tab-input:checked + .tab-label {
+    background-color: #3f4d67;
+color: #FFF;
+border: 1px solid black;
+}
+
+.tabs .tabs-wrap {
+    clear: both;
+}
+
+.tabs .tab {
+    background-color: #fff;
+    display: none;
+    padding: 1em;
+}
+
+.tabs .tab > *:last-child {
+    margin-bottom: 0;
+}
+
+#tab1:checked ~ .tabs-wrap #tab1content,
+#tab2:checked ~ .tabs-wrap #tab2content,
+#tab3:checked ~ .tabs-wrap #tab3content {
+    display: block;
+}
+
+div.browse-wrap {
+        top:0;
+        left:0;
+        margin:20px;
+        cursor:pointer;
+        overflow:hidden;
+        padding:20px 60px;
+        text-align:center;
+        position:relative;
+        background-color:#f6f7f8;
+        border:solid 1px #d2d2d7;}
+    div.title {
+        color:#3b5998;
+        font-size:14px;
+        font-weight:bold;
+        font-family:tahoma, arial, sans-serif;}
+    input.upload {
+        right:0;
+        margin:0;
+        bottom:0;
+        padding:0;
+        opacity:0;
+        height:300px;
+        outline:none;
+        cursor:inherit;
+        position:absolute;
+        font-size:1000px !important;}
+    span.upload-path {
+        text-align: center;
+        margin:20px;
+        display:block;
+        font-size: 80%;
+        color:#3b5998;
+        font-weight:bold;
+        font-family:tahoma, arial, sans-serif;
+}
+   </style>
+   <!-- [ Main Content ] start -->
+   <toaster-container></toaster-container>
+    <section class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <!-- [ breadcrumb ] start -->
+                        
+                        <!-- [ breadcrumb ] end -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- [ Main Content ] start -->
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Provisioning</h5>
+                                            </div>
+                                            <div class="card-block">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                    <label for="Device Type">Device Type</label>
+                                                                    <select  ng-model="deviceType" class="form-control" id="sel1" name="sellist1">
+                                                                        <option value="">Select Device Type</option>
+                                                                        <option value="5">RFID Card</option>
+                                                                        <option value="1">Bluetooth Beacon</option>
+                                                                    </select>  
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                                <label for="Device Type">Select Gateway</label>
+                                                                <select  ng-model="gateway" class="form-control" id="sel1" name="sellist1">
+                                                                    <option value="">Select Gateway</option>
+                                                                    <option ng-repeat="proDevice in proDevices" value="{{proDevice.serial}}">
+                                                                            {{proDevice.name}}
+                                                                    </option>
+                                                                    
+                                                                </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                                <label ng-show="deviceType == 1" for="pwd">Beacon Name</label>
+                                                                <label ng-show="deviceType == 5"  for="pwd">RRFID Name</label>
+                                                                <label ng-hide="deviceType == 1 || deviceType == 5"  for="pwd">Device Name</label>
+                                                                <input ng-model="deviceName" type="text" class="form-control" placeholder="Device name..." >
+                    
+                                                              </div>
+                                                     </div>
+                                                    <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                    <label ng-show="deviceType == 1" for="pwd">Beacon Serial No</label>
+                                                                    <label ng-show="deviceType == 5"  for="pwd">RRFID Serial No</label>
+                                                                    <label ng-hide="deviceType == 1 || deviceType == 5"  for="pwd">Device Serial No</label>
+                                                                    <input disabled="disabled" ng-model="deviceSerial" type="text" class="form-control" placeholder="Device serial..." >
+                                                            </div>
+                                                    </div>
+
+                                                                                                    
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                                <label for="pwd">Asset Id</label>
+                                                                <select  ng-model="assetId" class="form-control" id="sel1" name="sellist1">
+                                                                    <option value="">Select Asset</option>
+                                                                    <option ng-repeat="asset in assetDetails" value="{{asset.id}}">{{asset.name}}</option>
+                                                                </select> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-2" ng-hide="showBtn == true">
+                                                            <label for="pwd">&nbsp;</label>
+                                                        <button  ng-click="ScanDevice()" ng-disabled="ScanDisable" class="btn btn-primary btn-block">Scan 
+                                                            <div ng-show="showMsgSpinner == true" class="spinner-border spinner-border-sm" role="status"> 
+                                                                <span class="sr-only">Loading...</span></div></button>
+                                                    </div>
+ 
+                                                    <div class="col-lg-2" ng-show="showBtn == true">
+                                                        <label for="pwd">&nbsp;</label>
+                                                        <button  ng-click="saveDevice()" class="btn btn-primary btn-block" >Save</button>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-1" ng-show="showBtn == true">
+                                                            <label for="pwd">&nbsp;</label>
+                                                            <label for="pwd">&nbsp;</label>
+                                                            <button  ng-click="resetAll()" type="button" title="Reset" class="btn btn-icon btn-warning"><i class="feather icon-refresh-ccw"></i></button>
+                                                   
+                                                    </div> 
+                                                    
+                                                    <div class="col-lg-6" ng-show="errMsg == true">
+                                                            <br>
+                                                            <br>
+                                                            <span class="badge badge-danger">Time over please try again!</span>
+                                                          
+                                                    </div>
+
+                                                    <div class="col-lg-6" ng-show="showMsg == true">
+                                                        <br>
+                                                        <br>
+                                                        <span class="badge badge-warning">{{msg}}</span>
+                                                        <!-- <div class="spinner-border spinner-border-sm" role="status">
+                                                                <span class="sr-only">Loading...</span>
+                                                        </div> -->
+                                                        <!-- <div id="countdown"></div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Device List</h5>
+                                                    </div>
+                                                    <div class="card-block coustomBlock">
+                                                            <table id="proDevices" class="display table nowrap table-striped table-hover" width="100%" >
+                                                                    <thead>
+                                                                    <tr>
+                                            
+                                                                        <th>Asset Name</th>
+                                                                        <th>Device Type</th>
+                                                                        <th>Device Serial No.</th>
+                                                                        <th>Device Name</th>
+                                                                    
+                                                                    </tr>
+                                                                    </thead>
+                                                
+                                                                </table>
+                                                    </div>
+        
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+    
+                                    
+                </div>
+            </div>
+        </section>
+        <!-- [ Main Content ] end -->
+    
