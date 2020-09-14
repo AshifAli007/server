@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="7.016" height="13.676" viewBox="0 0 7.016 13.676">
-  <g id="drop-down-arrow" transform="matrix(-0.017, -1, 1, -0.017, -63.503, 14.789)">
-    <g id="arrow-drop-down" transform="translate(0 63.75)">
-      <path id="Path_1077" data-name="Path 1077" d="M0,63.75l6.78,6.78,6.78-6.78Z" transform="translate(0 -63.75)" fill="#200101"/>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="7.016" height="13.676" viewBox="0 0 7.016 13.676"><g id="drop-down-arrow" transform="matrix(-0.017, -1, 1, -0.017, -63.503, 14.789)"><g id="arrow-drop-down" transform="translate(0 63.75)"><path id="Path_1077" fill="#200101" d="M0,63.75l6.78,6.78,6.78-6.78Z" data-name="Path 1077" transform="translate(0 -63.75)"/></g></g></svg>
